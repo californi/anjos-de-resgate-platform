@@ -1,0 +1,24 @@
+sequenceDiagram
+  actor Usuario
+  actor Admin
+  participant Web as Frontend Next.js
+  participant API as API NestJS
+  participant Repo as AnimalsRepository
+  participant Equipe as Equipe de validacao
+
+  Usuario->>Web: Acessa portal
+  Usuario->>Web: Visualiza animais
+  Web->>API: GET /animals
+  API->>Repo: findAll()
+  Repo-->>API: Animais cadastrados
+  API-->>Web: Lista de animais
+  Admin->>Web: Acessa painel admin
+  Admin->>Web: Preenche formulario
+  Web->>API: POST /animals
+  API->>Repo: create(animal)
+  Repo-->>API: Animal cadastrado
+  API-->>Web: Animal criado
+  Usuario->>Web: Reabre listagem publica
+  Web->>API: GET /animals
+  API-->>Web: Animal aparece na lista
+  Equipe->>Equipe: Valida prototipo em 2026-06-17

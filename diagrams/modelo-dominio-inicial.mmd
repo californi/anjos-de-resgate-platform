@@ -1,0 +1,45 @@
+classDiagram
+  class Animal {
+    +String id
+    +String name
+    +AnimalSpecies species
+    +AnimalSex sex
+    +AnimalSize size
+    +String approximateAge
+    +String description
+    +String photoUrl
+    +AnimalStatus status
+    +Boolean specialNeeds
+    +Date createdAt
+    +Date updatedAt
+  }
+
+  class Adoptant {
+    <<future>>
+  }
+
+  class AdoptionInterest {
+    <<future>>
+  }
+
+  class Donation {
+    <<future>>
+  }
+
+  class Sponsorship {
+    <<future>>
+  }
+
+  class Campaign {
+    <<future>>
+  }
+
+  class Partner {
+    <<future>>
+  }
+
+  Adoptant "1" --> "0..*" AdoptionInterest : planned
+  Animal "1" --> "0..*" AdoptionInterest : planned
+  Animal "1" --> "0..*" Sponsorship : planned
+  Campaign "1" --> "0..*" Donation : planned
+  Partner "0..*" --> "0..*" Campaign : planned

@@ -1,0 +1,46 @@
+{
+  "name": "anjos-de-resgate-platform",
+  "version": "0.1.0",
+  "private": true,
+  "packageManager": "pnpm@11.7.0",
+  "description": "Monorepo da Plataforma Anjos de Resgate para prototipacao incremental.",
+  "workspaces": [
+    "apps/*",
+    "packages/*"
+  ],
+  "scripts": {
+    "build": "npm run build:packages && npm run build --workspaces --if-present",
+    "build:packages": "npm run build -w @anjos/domain && npm run build -w @anjos/shared && npm run build -w @anjos/ui",
+    "dev": "npm run build:packages && concurrently \"npm run start:dev -w @anjos/api\" \"npm run dev -w @anjos/web\"",
+    "dev:web": "npm run dev -w @anjos/web",
+    "dev:api": "npm run build:packages && npm run start:dev -w @anjos/api",
+    "pretest": "npm run build:packages",
+    "test": "npm run test --workspaces --if-present",
+    "lint": "npm run lint --workspaces --if-present",
+    "validate:arcassist-evaluation": "node tools/validate-arcassist-decision-package.mjs",
+    "db:generate": "npm run db:generate -w @anjos/api",
+    "db:generate:sqlite": "npm run db:generate:sqlite -w @anjos/api",
+    "db:push": "npm run db:push -w @anjos/api",
+    "db:push:sqlite": "npm run db:push:sqlite -w @anjos/api",
+    "db:migrate:dev": "npm run db:migrate:dev -w @anjos/api",
+    "db:migrate:dev:sqlite": "npm run db:migrate:dev:sqlite -w @anjos/api",
+    "db:seed": "npm run db:seed -w @anjos/api"
+  },
+  "devDependencies": {
+    "@testing-library/jest-dom": "^6.6.3",
+    "@testing-library/react": "^16.2.0",
+    "@types/node": "^22.13.10",
+    "@types/react": "^19.0.10",
+    "@types/react-dom": "^19.0.4",
+    "concurrently": "^9.1.2",
+    "eslint": "^9.22.0",
+    "jsdom": "^26.0.0",
+    "prettier": "^3.5.3",
+    "typescript": "^5.8.2",
+    "vitest": "^3.0.8"
+  },
+  "engines": {
+    "node": ">=20.11.0",
+    "npm": ">=10.0.0"
+  }
+}

@@ -1,0 +1,57 @@
+{
+  "increment": "prototipo-1",
+  "target_validation_date": "2026-07-01",
+  "baseline": {
+    "implemented_module": "Animals",
+    "web": "apps/web",
+    "api": "apps/api",
+    "domain": "packages/domain",
+    "shared": "packages/shared",
+    "ui": "packages/ui"
+  },
+  "evolution_concern": "Add institutional portal pages, contact page, administrative edit flow, simulated admin access and Docker-based execution without implementing future adoption or donation modules.",
+  "evidence_sources": [
+    "README.md",
+    "docs/01-escopo-funcional.md",
+    "docs/02-arquitetura.md",
+    "docs/03-backlog-incremental.md",
+    "docs/05-prototipos.md",
+    "docs/06-validacoes.md",
+    "docs/07-decisoes-arquiteturais/ADR-001-web-pwa-antes-de-app-nativo.md",
+    "docs/07-decisoes-arquiteturais/ADR-002-separacao-front-back-dominio-infra.md",
+    "docs/07-decisoes-arquiteturais/ADR-003-documentacao-versionada-adrs-mermaid-prompts.md",
+    "diagrams/arquitetura-geral.mmd",
+    "diagrams/fluxo-prototipo-1.mmd",
+    "diagrams/modelo-dominio-inicial.mmd",
+    "apps/api/src/animals",
+    "apps/web/src/app",
+    "packages/domain/src/animal.ts"
+  ],
+  "implemented_changes": [
+    "Added /sobre page.",
+    "Added /contato page.",
+    "Added simulated admin access gate.",
+    "Added administrative animal edit flow using PUT /animals/:id.",
+    "Separated public and internal API URLs for Docker execution.",
+    "Added Dockerfiles for API and Web.",
+    "Expanded docker-compose.yml to run PostgreSQL, API and Web.",
+    "Added Docker execution documentation.",
+    "Updated scope, architecture, backlog, prototype and validation documentation."
+  ],
+  "out_of_scope": [
+    "Real authentication",
+    "Role-based permissions",
+    "Full adoption process",
+    "Adoption-interest persistence",
+    "Donations",
+    "Sponsorship",
+    "Campaigns",
+    "Dashboard",
+    "Reports"
+  ],
+  "known_validation_limitations": [
+    "Manual browser validation of the administrative edit flow is still pending.",
+    "The admin access gate is only a prototype mechanism and must not be treated as production authentication.",
+    "Docker build requires internet access to install Node.js dependencies unless a local cache is available."
+  ]
+}

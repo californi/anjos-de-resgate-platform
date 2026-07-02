@@ -1,0 +1,14 @@
+flowchart LR
+  user["Usuario web/mobile"] --> web["Frontend Next.js / PWA"]
+  admin["Equipe admin"] --> web
+  web --> api["API NestJS"]
+  api --> app["Camada de aplicacao"]
+  app --> domain["Dominio"]
+  app --> repo["Contrato AnimalsRepository"]
+  repo --> infra["Infraestrutura Prisma"]
+  infra --> db["PostgreSQL"]
+  infra -. alternativa .-> sqlite["SQLite prototipo"]
+  repo -. demonstracao .-> memory["Repositorio em memoria"]
+  docs["Docs, ADRs, Mermaid e prompts"] -. rastreiam .-> web
+  docs -. rastreiam .-> api
+  docs -. rastreiam .-> domain

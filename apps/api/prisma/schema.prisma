@@ -1,0 +1,52 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+enum AnimalStatus {
+  AVAILABLE
+  IN_TREATMENT
+  IN_ADOPTION_PROCESS
+  ADOPTED
+}
+
+enum AnimalSpecies {
+  DOG
+  CAT
+  OTHER
+}
+
+enum AnimalSex {
+  MALE
+  FEMALE
+  UNKNOWN
+}
+
+enum AnimalSize {
+  SMALL
+  MEDIUM
+  LARGE
+  UNKNOWN
+}
+
+model Animal {
+  id             String        @id @default(uuid())
+  name           String
+  species        AnimalSpecies
+  sex            AnimalSex     @default(UNKNOWN)
+  size           AnimalSize    @default(UNKNOWN)
+  approximateAge String
+  description    String
+  photoUrl       String?
+  status         AnimalStatus  @default(AVAILABLE)
+  specialNeeds   Boolean       @default(false)
+  createdAt      DateTime      @default(now())
+  updatedAt      DateTime      @updatedAt
+
+  @@index([status])
+  @@index([species])
+}

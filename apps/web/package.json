@@ -1,0 +1,28 @@
+{
+  "name": "@anjos/web",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Frontend Next.js/PWA da Plataforma Anjos de Resgate.",
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "test": "vitest run --passWithNoTests",
+    "lint": "tsc -p tsconfig.json --noEmit"
+  },
+  "dependencies": {
+    "@anjos/domain": "workspace:*",
+    "@anjos/shared": "workspace:*",
+    "@anjos/ui": "workspace:*",
+    "next": "^15.2.2",
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0"
+  },
+  "devDependencies": {
+    "autoprefixer": "^10.4.21",
+    "postcss": "^8.5.3",
+    "tailwindcss": "^3.4.17",
+    "typescript": "^5.8.2",
+    "vitest": "^3.0.8"
+  }
+}

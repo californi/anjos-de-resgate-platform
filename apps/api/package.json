@@ -1,0 +1,48 @@
+{
+  "name": "@anjos/api",
+  "version": "0.1.0",
+  "private": true,
+  "description": "API NestJS da Plataforma Anjos de Resgate.",
+  "scripts": {
+    "build": "nest build",
+    "start": "node dist/main.js",
+    "start:dev": "nest start --watch",
+    "test": "vitest run",
+    "lint": "tsc -p tsconfig.json --noEmit",
+    "db:generate": "prisma generate --schema prisma/schema.prisma",
+    "db:generate:sqlite": "prisma generate --schema prisma/schema.sqlite.prisma",
+    "db:push": "prisma db push --schema prisma/schema.prisma",
+    "db:push:sqlite": "prisma db push --schema prisma/schema.sqlite.prisma",
+    "db:migrate:dev": "prisma migrate dev --schema prisma/schema.prisma",
+    "db:migrate:dev:sqlite": "prisma migrate dev --schema prisma/schema.sqlite.prisma",
+    "db:seed": "tsx prisma/seed.ts"
+  },
+  "dependencies": {
+    "@anjos/domain": "workspace:*",
+    "@anjos/shared": "workspace:*",
+    "@nestjs/common": "^11.0.11",
+    "@nestjs/config": "^4.0.2",
+    "@nestjs/core": "^11.0.11",
+    "@nestjs/mapped-types": "^2.1.0",
+    "@nestjs/platform-express": "^11.0.11",
+    "@prisma/client": "^6.5.0",
+    "class-transformer": "^0.5.1",
+    "class-validator": "^0.14.1",
+    "dotenv": "^16.4.7",
+    "reflect-metadata": "^0.2.2",
+    "rxjs": "^7.8.2"
+  },
+  "devDependencies": {
+    "@nestjs/cli": "^11.0.5",
+    "@types/express": "^5.0.1",
+    "@types/supertest": "^6.0.3",
+    "prisma": "^6.5.0",
+    "supertest": "^7.0.0",
+    "tsx": "^4.19.3",
+    "typescript": "^5.8.2",
+    "vitest": "^3.0.8"
+  },
+  "prisma": {
+    "seed": "tsx prisma/seed.ts"
+  }
+}
