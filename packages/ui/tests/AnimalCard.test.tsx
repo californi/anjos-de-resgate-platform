@@ -1,6 +1,12 @@
+import "@testing-library/jest-dom/vitest";
 import { render, screen } from "@testing-library/react";
 import { describe, expect, it } from "vitest";
-import { AnimalSex, AnimalSize, AnimalSpecies, AnimalStatus } from "@anjos/domain";
+import {
+  AnimalSex,
+  AnimalSize,
+  AnimalSpecies,
+  AnimalStatus,
+} from "@anjos/domain";
 import { AnimalCard } from "../src";
 
 describe("AnimalCard", () => {
@@ -19,14 +25,16 @@ describe("AnimalCard", () => {
           status: AnimalStatus.AVAILABLE,
           specialNeeds: false,
           createdAt: new Date(),
-          updatedAt: new Date()
+          updatedAt: new Date(),
         }}
-      />
+      />,
     );
 
     expect(screen.getByRole("heading", { name: "Mel" })).toBeInTheDocument();
     expect(screen.getByText("Cachorro")).toBeInTheDocument();
     expect(screen.getByText("Disponivel")).toBeInTheDocument();
-    expect(screen.getByRole("link", { name: "Tenho interesse" })).toBeInTheDocument();
+    expect(
+      screen.getByRole("link", { name: "Tenho interesse" }),
+    ).toBeInTheDocument();
   });
 });

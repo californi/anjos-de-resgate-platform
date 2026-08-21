@@ -1,4 +1,4 @@
-import { AnimalCard } from "@anjos/ui";
+import { AnimalFeed } from "@/components/AnimalFeed";
 import { listAnimals } from "@/lib/api";
 
 export default async function AnimalsPage() {
@@ -10,9 +10,9 @@ export default async function AnimalsPage() {
         <p className="eyebrow">Portal publico</p>
         <h1>Animais disponiveis</h1>
         <p>
-          Perfis iniciais para demonstrar a divulgacao de animais da ONG. O botao
-          "Tenho interesse" ainda e visual e sera ligado ao fluxo de adocao em outra
-          iteracao.
+          Feed compacto para divulgar muitos animais sem perder o acesso rapido
+          ao detalhe e ao registro inicial de interesse. Os dados desta versao
+          sao ficticios e servem para validacao com a equipe.
         </p>
         {source === "demo" ? (
           <p className="status-message">
@@ -22,11 +22,7 @@ export default async function AnimalsPage() {
       </div>
 
       <section className="section">
-        <div className="animal-grid">
-          {animals.map((animal) => (
-            <AnimalCard key={animal.id} animal={animal} />
-          ))}
-        </div>
+        <AnimalFeed animals={animals} />
       </section>
     </main>
   );

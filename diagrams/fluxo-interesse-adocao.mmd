@@ -1,0 +1,29 @@
+sequenceDiagram
+  actor Visitante
+  actor Admin
+  participant Web as Frontend Next.js
+  participant API as API NestJS
+  participant AnimalsRepo as AnimalsRepository
+  participant InterestsRepo as AdoptionInterestsRepository
+
+  Visitante->>Web: Acessa detalhe de animal
+  Web->>API: GET /animals/:id
+  API->>AnimalsRepo: findById(id)
+  AnimalsRepo-->>API: Animal
+  API-->>Web: Perfil do animal
+  Visitante->>Web: Preenche interesse
+  Web->>API: POST /adoption-interests
+  API->>AnimalsRepo: findById(animalId)
+  alt Animal nao esta em processo de adocao
+    API->>InterestsRepo: create(interest RECEIVED)
+    InterestsRepo-->>API: Interesse registrado
+    API-->>Web: Confirmacao para visitante
+  else Animal em processo de adocao
+    API-->>Web: Erro de regra de aplicacao
+  end
+  Admin->>Web: Acessa solicitacoes de interesse
+  Web->>API: GET /adoption-interests
+  API->>InterestsRepo: findAll()
+  InterestsRepo-->>API: Interesses recebidos
+  API-->>Web: Lista para revisao humana
+  Web-->>Admin: Quantidade por animal e detalhes das solicitacoes

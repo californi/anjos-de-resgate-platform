@@ -9,22 +9,26 @@
     "packages/*"
   ],
   "scripts": {
-    "build": "npm run build:packages && npm run build --workspaces --if-present",
-    "build:packages": "npm run build -w @anjos/domain && npm run build -w @anjos/shared && npm run build -w @anjos/ui",
-    "dev": "npm run build:packages && concurrently \"npm run start:dev -w @anjos/api\" \"npm run dev -w @anjos/web\"",
-    "dev:web": "npm run dev -w @anjos/web",
-    "dev:api": "npm run build:packages && npm run start:dev -w @anjos/api",
-    "pretest": "npm run build:packages",
-    "test": "npm run test --workspaces --if-present",
-    "lint": "npm run lint --workspaces --if-present",
-    "validate:arcassist-evaluation": "node tools/validate-arcassist-decision-package.mjs",
-    "db:generate": "npm run db:generate -w @anjos/api",
-    "db:generate:sqlite": "npm run db:generate:sqlite -w @anjos/api",
-    "db:push": "npm run db:push -w @anjos/api",
-    "db:push:sqlite": "npm run db:push:sqlite -w @anjos/api",
-    "db:migrate:dev": "npm run db:migrate:dev -w @anjos/api",
-    "db:migrate:dev:sqlite": "npm run db:migrate:dev:sqlite -w @anjos/api",
-    "db:seed": "npm run db:seed -w @anjos/api"
+    "build": "pnpm run build:packages && pnpm --filter @anjos/api build && pnpm --filter @anjos/web build",
+    "build:packages": "pnpm --filter @anjos/domain build && pnpm --filter @anjos/shared build && pnpm --filter @anjos/ui build",
+    "dev": "pnpm run build:packages && concurrently \"pnpm --filter @anjos/api start:dev\" \"pnpm --filter @anjos/web dev\"",
+    "dev:web": "pnpm --filter @anjos/web dev",
+    "dev:api": "pnpm run build:packages && pnpm --filter @anjos/api start:dev",
+    "pretest": "pnpm run build:packages",
+    "test": "pnpm -r --if-present test",
+    "lint": "pnpm -r --if-present lint",
+    "db:generate": "pnpm --filter @anjos/api db:generate",
+    "db:generate:sqlite": "pnpm --filter @anjos/api db:generate:sqlite",
+    "db:push": "pnpm --filter @anjos/api db:push",
+    "db:push:sqlite": "pnpm --filter @anjos/api db:push:sqlite",
+    "db:migrate:dev": "pnpm --filter @anjos/api db:migrate:dev",
+    "db:migrate:dev:sqlite": "pnpm --filter @anjos/api db:migrate:dev:sqlite",
+    "db:seed": "pnpm --filter @anjos/api db:seed",
+    "docker:up": "sh scripts/docker-prototype.sh up",
+    "docker:down": "sh scripts/docker-prototype.sh down",
+    "docker:reset": "sh scripts/docker-prototype.sh reset",
+    "docker:status": "sh scripts/docker-prototype.sh status",
+    "docker:logs": "sh scripts/docker-prototype.sh logs"
   },
   "devDependencies": {
     "@testing-library/jest-dom": "^6.6.3",
@@ -41,6 +45,6 @@
   },
   "engines": {
     "node": ">=20.11.0",
-    "npm": ">=10.0.0"
+    "pnpm": ">=10.0.0"
   }
 }

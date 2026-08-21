@@ -32,6 +32,40 @@ O modulo de animais possui:
 - `PrismaAnimalsRepository` como infraestrutura principal.
 - `InMemoryAnimalsRepository` para demonstracao sem banco.
 - `AnimalCard` como componente reutilizavel.
+- `AnimalFeed` como visualizacao publica compacta para muitos animais.
+- `AdminAnimalsInventory` como visualizacao administrativa compacta.
+- Contagem administrativa de interesses por animal derivada na Web a partir da
+  lista de `AdoptionInterest`.
+- Rotas administrativas separadas para inventario, cadastro e edicao de
+  animais.
+
+O feed publico usa tiles quadrados de midia para preparar a interface para
+dezenas de animais e para uma possivel evolucao futura com videos. Nesta
+iteracao, videos reais, upload de midia, storage, paginacao e filtros avancados
+nao foram implementados.
+
+## Modulo de interesses de adocao
+
+O incremento Prototipo 2.1 adiciona um modulo pequeno para registrar interesse
+inicial em adocao:
+
+- Entidade `AdoptionInterest` no dominio.
+- DTOs de criacao e atualizacao de status na API.
+- `AdoptionInterestsService` como camada de aplicacao.
+- `AdoptionInterestsRepository` como contrato.
+- `PrismaAdoptionInterestsRepository` como infraestrutura principal.
+- `InMemoryAdoptionInterestsRepository` para testes e prototipo sem banco.
+- Formulario publico no detalhe do animal.
+- Tela administrativa propria para solicitacoes de interesse.
+- Resumo administrativo de quantidade de interesses por animal.
+
+A regra de aplicacao atual bloqueia interesse apenas quando o animal esta em
+`IN_ADOPTION_PROCESS`. O registro nao altera automaticamente o status do animal
+e nao conclui nenhuma etapa de adocao.
+
+No prototipo atual, a contagem de interesses exibida no inventario admin e uma
+agregacao de interface. Ela reutiliza a consulta de solicitacoes existente e
+nao introduz endpoint agregado ou relatorio dedicado.
 
 ## Ambientacao
 
@@ -44,7 +78,7 @@ No Docker, a Web usa `API_INTERNAL_URL` para chamadas server-side entre containe
 
 ## Modulos futuros
 
-Os modulos de adocao, adotantes, interesses, doacoes, apadrinhamento, campanhas, parcerias, dashboard, usuarios/permissoes, gestao administrativa de conteudo e relatorios devem ser adicionados incrementalmente, com ADRs quando introduzirem novas decisoes relevantes.
+Os modulos de adocao completa, adotantes, doacoes, apadrinhamento, campanhas, parcerias, dashboard, usuarios/permissoes, gestao administrativa de conteudo e relatorios devem ser adicionados incrementalmente, com ADRs quando introduzirem novas decisoes relevantes.
 
 ## Decisoes iniciais
 
@@ -54,3 +88,5 @@ Os modulos de adocao, adotantes, interesses, doacoes, apadrinhamento, campanhas,
 - PostgreSQL como alvo arquitetural, com SQLite e memoria como alternativas de prototipo.
 - Conteudo do portal centralizado em arquivo compartilhado nesta fase, com
   evolucao futura para gestao administrativa.
+- Feed compacto para muitos animais, com suporte visual a midias quadradas e
+  videos reais adiados para decisao futura.

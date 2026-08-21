@@ -1,57 +1,70 @@
-import { AnimalCard } from "@anjos/ui";
 import { AdminAccessGate } from "@/components/AdminAccessGate";
-import { AnimalForm } from "@/components/AnimalForm";
-import { StatusUpdater } from "@/components/StatusUpdater";
-import { listAnimals } from "@/lib/api";
+import { AdminAnimalsNav } from "@/components/AdminAnimalsNav";
+import { AdminAnimalsInventory } from "@/components/AdminAnimalsInventory";
+import { listAdoptionInterests, listAnimals } from "@/lib/api";
 
-type AdminAnimalsPageProps = {
-  searchParams: Promise<{ animal?: string }>;
-};
-
-export default async function AdminAnimalsPage({ searchParams }: AdminAnimalsPageProps) {
-  const { animal: selectedAnimalId } = await searchParams;
+export default async function AdminAnimalsPage() {
   const { animals, source } = await listAnimals();
-  const selectedAnimal = animals.find((animal) => animal.id === selectedAnimalId);
+  const { interests, source: interestsSource } = await listAdoptionInterests();
+  const interestCountsByAnimalId = interests.reduce<Record<string, number>>(
+    (counts, interest) => {
+      counts[interest.animalId] = (counts[interest.animalId] ?? 0) + 1;
+      return counts;
+    },
+    {},
+  );
 
   return (
     <main>
       <div className="page-title">
         <p className="eyebrow">Painel administrativo inicial</p>
         <h1>Gestao de animais</h1>
-        <p>Cadastro, edicao e status dos animais para validacao do Prototipo 1.</p>
+        <p>
+          Inventario compacto para acompanhar muitos perfis, alterar status e
+          acessar as telas separadas de cadastro, edicao e solicitacoes.
+        </p>
         {source === "demo" ? (
           <p className="status-message">
-            A API nao respondeu. O cadastro e a alteracao de status exigem a API ativa.
+            A API nao respondeu. O cadastro e a alteracao de status exigem a API
+            ativa.
           </p>
         ) : null}
       </div>
 
       <AdminAccessGate>
-        <section className="section admin-grid">
-          <aside className="panel">
-            <h2>{selectedAnimal ? "Editar animal" : "Cadastrar novo animal"}</h2>
-            {selectedAnimalId && !selectedAnimal ? (
-              <p className="status-message">Animal selecionado nao foi encontrado.</p>
-            ) : null}
-            <AnimalForm animal={selectedAnimal} />
-          </aside>
+        <section className="section compact-section">
+          <AdminAnimalsNav active="inventory" />
+          {interestsSource === "empty" ? (
+            <p className="status-message">
+              A contagem de interesses nao esta disponivel porque a API de
+              solicitacoes nao respondeu.
+            </p>
+          ) : null}
+          <div className="admin-toolbar">
+            <a className="button-link" href="/admin/animais/cadastro">
+              Cadastrar animal
+            </a>
+            <a
+              className="button-link secondary"
+              href="/admin/animais/interesses"
+            >
+              Ver solicitacoes de interesse
+            </a>
+          </div>
 
-          <div>
+          <div className="panel">
             <div className="section-header">
               <div>
                 <p className="eyebrow">Animais cadastrados</p>
                 <h2>Lista administrativa</h2>
               </div>
+              <p className="muted">{animals.length} perfis carregados</p>
             </div>
 
-            <div className="admin-list">
-              {animals.map((animal) => (
-                <div className="admin-item" key={animal.id}>
-                  <AnimalCard animal={animal} mode="admin" />
-                  <StatusUpdater animal={animal} />
-                </div>
-              ))}
-            </div>
+            <AdminAnimalsInventory
+              animals={animals}
+              interestCountsByAnimalId={interestCountsByAnimalId}
+            />
           </div>
         </section>
       </AdminAccessGate>

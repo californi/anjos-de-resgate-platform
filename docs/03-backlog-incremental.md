@@ -29,8 +29,19 @@
 
 ## Prototipo 2 - Adocao estilo Tinder
 
+- Incremento 2.1: feed publico compacto para dezenas de animais.
+- Incremento 2.1: inventario administrativo compacto para muitos animais.
+- Incremento 2.1: seed ampliado para validar volume de perfis.
+- Incremento 2.1: registro publico de interesse em adocao a partir do perfil do
+  animal.
+- Incremento 2.1: tela administrativa de solicitacoes de interesse.
+- Incremento 2.1: telas administrativas separadas para inventario, cadastro,
+  edicao e solicitacoes.
+- Incremento 2.1: quantidade de interesses por animal na visao administrativa.
+- Incremento 2.1: quantidade de interesses no resumo do inventario
+  administrativo.
 - Experiencia de descoberta por swipe.
-- Registro de interesse.
+- Busca, filtros e paginacao apos validacao do volume real.
 - Cadastro de adotantes.
 - Triagem inicial.
 

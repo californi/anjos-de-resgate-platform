@@ -3,12 +3,14 @@ import {
   AnimalSize,
   AnimalSpecies,
   AnimalStatus,
-  type AnimalSnapshot
+  type AnimalSnapshot,
 } from "@anjos/domain";
 
 const createdAt = new Date("2026-06-01T10:00:00.000Z");
 
-export const demoAnimals: AnimalSnapshot[] = [
+type DemoAnimalProfile = Omit<AnimalSnapshot, "createdAt" | "updatedAt">;
+
+const demoAnimalProfiles: DemoAnimalProfile[] = [
   {
     id: "demo-mel",
     name: "Mel",
@@ -21,8 +23,6 @@ export const demoAnimals: AnimalSnapshot[] = [
       "https://images.unsplash.com/photo-1552053831-71594a27632d?auto=format&fit=crop&w=900&q=80",
     status: AnimalStatus.AVAILABLE,
     specialNeeds: false,
-    createdAt,
-    updatedAt: createdAt
   },
   {
     id: "demo-bento",
@@ -36,8 +36,6 @@ export const demoAnimals: AnimalSnapshot[] = [
       "https://images.unsplash.com/photo-1514888286974-6c03e2ca1dba?auto=format&fit=crop&w=900&q=80",
     status: AnimalStatus.AVAILABLE,
     specialNeeds: false,
-    createdAt,
-    updatedAt: createdAt
   },
   {
     id: "demo-luna",
@@ -46,12 +44,375 @@ export const demoAnimals: AnimalSnapshot[] = [
     sex: AnimalSex.FEMALE,
     size: AnimalSize.LARGE,
     approximateAge: "4 anos",
-    description: "Esta em tratamento e deve ser acompanhada pela equipe antes da adocao.",
+    description:
+      "Esta em tratamento e deve ser acompanhada pela equipe antes da adocao.",
     photoUrl:
       "https://images.unsplash.com/photo-1518717758536-85ae29035b6d?auto=format&fit=crop&w=900&q=80",
     status: AnimalStatus.IN_TREATMENT,
     specialNeeds: true,
-    createdAt,
-    updatedAt: createdAt
-  }
+  },
+  {
+    id: "demo-thor",
+    name: "Thor",
+    species: AnimalSpecies.DOG,
+    sex: AnimalSex.MALE,
+    size: AnimalSize.LARGE,
+    approximateAge: "3 anos",
+    description: "Cao ativo, protetor e indicado para familia com espaco.",
+    photoUrl:
+      "https://images.unsplash.com/photo-1561037404-61cd46aa615b?auto=format&fit=crop&w=900&q=80",
+    status: AnimalStatus.AVAILABLE,
+    specialNeeds: false,
+  },
+  {
+    id: "demo-nina",
+    name: "Nina",
+    species: AnimalSpecies.CAT,
+    sex: AnimalSex.FEMALE,
+    size: AnimalSize.SMALL,
+    approximateAge: "8 meses",
+    description: "Gata tranquila, sociavel e acostumada com ambiente interno.",
+    photoUrl:
+      "https://images.unsplash.com/photo-1574144611937-0df059b5ef3e?auto=format&fit=crop&w=900&q=80",
+    status: AnimalStatus.AVAILABLE,
+    specialNeeds: false,
+  },
+  {
+    id: "demo-maya",
+    name: "Maya",
+    species: AnimalSpecies.DOG,
+    sex: AnimalSex.FEMALE,
+    size: AnimalSize.MEDIUM,
+    approximateAge: "5 anos",
+    description: "Companheira, calma e em busca de uma rotina segura.",
+    photoUrl:
+      "https://images.unsplash.com/photo-1548199973-03cce0bbc87b?auto=format&fit=crop&w=900&q=80",
+    status: AnimalStatus.AVAILABLE,
+    specialNeeds: false,
+  },
+  {
+    id: "demo-simba",
+    name: "Simba",
+    species: AnimalSpecies.CAT,
+    sex: AnimalSex.MALE,
+    size: AnimalSize.MEDIUM,
+    approximateAge: "2 anos",
+    description: "Gato independente, curioso e ja castrado.",
+    photoUrl:
+      "https://images.unsplash.com/photo-1592194996308-7b43878e84a6?auto=format&fit=crop&w=900&q=80",
+    status: AnimalStatus.IN_ADOPTION_PROCESS,
+    specialNeeds: false,
+  },
+  {
+    id: "demo-bela",
+    name: "Bela",
+    species: AnimalSpecies.DOG,
+    sex: AnimalSex.FEMALE,
+    size: AnimalSize.SMALL,
+    approximateAge: "6 anos",
+    description: "Cachorrinha carinhosa, ideal para companhia diaria.",
+    photoUrl:
+      "https://images.unsplash.com/photo-1586671267731-da2cf3ceeb80?auto=format&fit=crop&w=900&q=80",
+    status: AnimalStatus.AVAILABLE,
+    specialNeeds: true,
+  },
+  {
+    id: "demo-amora",
+    name: "Amora",
+    species: AnimalSpecies.CAT,
+    sex: AnimalSex.FEMALE,
+    size: AnimalSize.SMALL,
+    approximateAge: "1 ano",
+    description: "Gata jovem, brincalhona e receptiva a novos tutores.",
+    photoUrl:
+      "https://images.unsplash.com/photo-1495360010541-f48722b34f7d?auto=format&fit=crop&w=900&q=80",
+    status: AnimalStatus.AVAILABLE,
+    specialNeeds: false,
+  },
+  {
+    id: "demo-pipoca",
+    name: "Pipoca",
+    species: AnimalSpecies.DOG,
+    sex: AnimalSex.FEMALE,
+    size: AnimalSize.SMALL,
+    approximateAge: "10 meses",
+    description: "Filhote esperta, precisa de acompanhamento e socializacao.",
+    photoUrl:
+      "https://images.unsplash.com/photo-1517849845537-4d257902454a?auto=format&fit=crop&w=900&q=80",
+    status: AnimalStatus.AVAILABLE,
+    specialNeeds: false,
+  },
+  {
+    id: "demo-zeus",
+    name: "Zeus",
+    species: AnimalSpecies.DOG,
+    sex: AnimalSex.MALE,
+    size: AnimalSize.LARGE,
+    approximateAge: "7 anos",
+    description: "Cao adulto, obediente e indicado para adotante experiente.",
+    photoUrl:
+      "https://images.unsplash.com/photo-1529429617124-95b109e86bb8?auto=format&fit=crop&w=900&q=80",
+    status: AnimalStatus.IN_TREATMENT,
+    specialNeeds: false,
+  },
+  {
+    id: "demo-frida",
+    name: "Frida",
+    species: AnimalSpecies.CAT,
+    sex: AnimalSex.FEMALE,
+    size: AnimalSize.MEDIUM,
+    approximateAge: "3 anos",
+    description: "Gata observadora, carinhosa depois de ganhar confianca.",
+    photoUrl:
+      "https://images.unsplash.com/photo-1548247416-ec66f4900b2e?auto=format&fit=crop&w=900&q=80",
+    status: AnimalStatus.AVAILABLE,
+    specialNeeds: false,
+  },
+  {
+    id: "demo-tobias",
+    name: "Tobias",
+    species: AnimalSpecies.DOG,
+    sex: AnimalSex.MALE,
+    size: AnimalSize.MEDIUM,
+    approximateAge: "4 anos",
+    description: "Cao equilibrado, gosta de passeios curtos e companhia.",
+    photoUrl:
+      "https://images.unsplash.com/photo-1537151608828-ea2b11777ee8?auto=format&fit=crop&w=900&q=80",
+    status: AnimalStatus.AVAILABLE,
+    specialNeeds: false,
+  },
+  {
+    id: "demo-olivia",
+    name: "Olivia",
+    species: AnimalSpecies.CAT,
+    sex: AnimalSex.FEMALE,
+    size: AnimalSize.SMALL,
+    approximateAge: "2 anos",
+    description: "Gata pequena, silenciosa e adaptada a apartamento.",
+    photoUrl:
+      "https://images.unsplash.com/photo-1519052537078-e6302a4968d4?auto=format&fit=crop&w=900&q=80",
+    status: AnimalStatus.AVAILABLE,
+    specialNeeds: false,
+  },
+  {
+    id: "demo-bob",
+    name: "Bob",
+    species: AnimalSpecies.DOG,
+    sex: AnimalSex.MALE,
+    size: AnimalSize.MEDIUM,
+    approximateAge: "2 anos",
+    description: "Cao alegre, sociavel e com energia moderada.",
+    photoUrl:
+      "https://images.unsplash.com/photo-1558788353-f76d92427f16?auto=format&fit=crop&w=900&q=80",
+    status: AnimalStatus.AVAILABLE,
+    specialNeeds: false,
+  },
+  {
+    id: "demo-sushi",
+    name: "Sushi",
+    species: AnimalSpecies.CAT,
+    sex: AnimalSex.MALE,
+    size: AnimalSize.SMALL,
+    approximateAge: "11 meses",
+    description: "Gato jovem, curioso e muito brincalhao.",
+    photoUrl:
+      "https://images.unsplash.com/photo-1518791841217-8f162f1e1131?auto=format&fit=crop&w=900&q=80",
+    status: AnimalStatus.ADOPTED,
+    specialNeeds: false,
+  },
+  {
+    id: "demo-lola",
+    name: "Lola",
+    species: AnimalSpecies.DOG,
+    sex: AnimalSex.FEMALE,
+    size: AnimalSize.MEDIUM,
+    approximateAge: "1 ano",
+    description: "Cadela jovem, docil e em fase de treinamento basico.",
+    photoUrl:
+      "https://images.unsplash.com/photo-1517423440428-a5a00ad493e8?auto=format&fit=crop&w=900&q=80",
+    status: AnimalStatus.AVAILABLE,
+    specialNeeds: false,
+  },
+  {
+    id: "demo-romeu",
+    name: "Romeu",
+    species: AnimalSpecies.CAT,
+    sex: AnimalSex.MALE,
+    size: AnimalSize.MEDIUM,
+    approximateAge: "5 anos",
+    description: "Gato adulto, calmo e indicado para lar sem muito barulho.",
+    photoUrl:
+      "https://images.unsplash.com/photo-1533738363-b7f9aef128ce?auto=format&fit=crop&w=900&q=80",
+    status: AnimalStatus.AVAILABLE,
+    specialNeeds: true,
+  },
+  {
+    id: "demo-cacau",
+    name: "Cacau",
+    species: AnimalSpecies.DOG,
+    sex: AnimalSex.FEMALE,
+    size: AnimalSize.LARGE,
+    approximateAge: "3 anos",
+    description: "Cadela forte, carinhosa e com boa convivencia.",
+    photoUrl:
+      "https://images.unsplash.com/photo-1543466835-00a7907e9de1?auto=format&fit=crop&w=900&q=80",
+    status: AnimalStatus.AVAILABLE,
+    specialNeeds: false,
+  },
+  {
+    id: "demo-dora",
+    name: "Dora",
+    species: AnimalSpecies.DOG,
+    sex: AnimalSex.FEMALE,
+    size: AnimalSize.SMALL,
+    approximateAge: "8 anos",
+    description: "Idosa tranquila, precisa de rotina calma e acompanhamento.",
+    photoUrl:
+      "https://images.unsplash.com/photo-1518717758536-85ae29035b6d?auto=format&fit=crop&w=900&q=80",
+    status: AnimalStatus.IN_TREATMENT,
+    specialNeeds: true,
+  },
+  {
+    id: "demo-kiara",
+    name: "Kiara",
+    species: AnimalSpecies.CAT,
+    sex: AnimalSex.FEMALE,
+    size: AnimalSize.MEDIUM,
+    approximateAge: "4 anos",
+    description: "Gata independente, castrada e de facil manejo.",
+    photoUrl:
+      "https://images.unsplash.com/photo-1561948955-570b270e7c36?auto=format&fit=crop&w=900&q=80",
+    status: AnimalStatus.AVAILABLE,
+    specialNeeds: false,
+  },
+  {
+    id: "demo-max",
+    name: "Max",
+    species: AnimalSpecies.DOG,
+    sex: AnimalSex.MALE,
+    size: AnimalSize.LARGE,
+    approximateAge: "2 anos",
+    description: "Cao jovem, brincalhao e ideal para familia ativa.",
+    photoUrl:
+      "https://images.unsplash.com/photo-1560807707-8cc77767d783?auto=format&fit=crop&w=900&q=80",
+    status: AnimalStatus.AVAILABLE,
+    specialNeeds: false,
+  },
+  {
+    id: "demo-jasmin",
+    name: "Jasmin",
+    species: AnimalSpecies.CAT,
+    sex: AnimalSex.FEMALE,
+    size: AnimalSize.SMALL,
+    approximateAge: "6 meses",
+    description: "Filhote delicada, precisa de ambiente seguro.",
+    photoUrl:
+      "https://images.unsplash.com/photo-1513360371669-4adf3dd7dff8?auto=format&fit=crop&w=900&q=80",
+    status: AnimalStatus.AVAILABLE,
+    specialNeeds: false,
+  },
+  {
+    id: "demo-bidu",
+    name: "Bidu",
+    species: AnimalSpecies.DOG,
+    sex: AnimalSex.MALE,
+    size: AnimalSize.SMALL,
+    approximateAge: "5 anos",
+    description: "Pequeno, esperto e bom para companhia.",
+    photoUrl:
+      "https://images.unsplash.com/photo-1507146426996-ef05306b995a?auto=format&fit=crop&w=900&q=80",
+    status: AnimalStatus.IN_ADOPTION_PROCESS,
+    specialNeeds: false,
+  },
+  {
+    id: "demo-gaia",
+    name: "Gaia",
+    species: AnimalSpecies.DOG,
+    sex: AnimalSex.FEMALE,
+    size: AnimalSize.MEDIUM,
+    approximateAge: "3 anos",
+    description: "Cadela sensivel, melhora com rotina previsivel.",
+    photoUrl:
+      "https://images.unsplash.com/photo-1530281700549-e82e7bf110d6?auto=format&fit=crop&w=900&q=80",
+    status: AnimalStatus.AVAILABLE,
+    specialNeeds: false,
+  },
+  {
+    id: "demo-nico",
+    name: "Nico",
+    species: AnimalSpecies.CAT,
+    sex: AnimalSex.MALE,
+    size: AnimalSize.MEDIUM,
+    approximateAge: "1 ano",
+    description: "Gato sociavel, gosta de brincar e explorar.",
+    photoUrl:
+      "https://images.unsplash.com/photo-1573865526739-10659fec78a5?auto=format&fit=crop&w=900&q=80",
+    status: AnimalStatus.AVAILABLE,
+    specialNeeds: false,
+  },
+  {
+    id: "demo-sol",
+    name: "Sol",
+    species: AnimalSpecies.DOG,
+    sex: AnimalSex.FEMALE,
+    size: AnimalSize.MEDIUM,
+    approximateAge: "9 meses",
+    description: "Filhote alegre, precisa de adotante paciente.",
+    photoUrl:
+      "https://images.unsplash.com/photo-1529472119196-cb724127a98e?auto=format&fit=crop&w=900&q=80",
+    status: AnimalStatus.AVAILABLE,
+    specialNeeds: false,
+  },
+  {
+    id: "demo-tuca",
+    name: "Tuca",
+    species: AnimalSpecies.CAT,
+    sex: AnimalSex.FEMALE,
+    size: AnimalSize.SMALL,
+    approximateAge: "7 anos",
+    description: "Gata adulta, calma e indicada para lar tranquilo.",
+    photoUrl:
+      "https://images.unsplash.com/photo-1543852786-1cf6624b9987?auto=format&fit=crop&w=900&q=80",
+    status: AnimalStatus.AVAILABLE,
+    specialNeeds: true,
+  },
+  {
+    id: "demo-apolo",
+    name: "Apolo",
+    species: AnimalSpecies.DOG,
+    sex: AnimalSex.MALE,
+    size: AnimalSize.LARGE,
+    approximateAge: "6 anos",
+    description: "Cao adulto, forte e muito apegado a cuidadores.",
+    photoUrl:
+      "https://images.unsplash.com/photo-1548199973-03cce0bbc87b?auto=format&fit=crop&w=900&q=80",
+    status: AnimalStatus.AVAILABLE,
+    specialNeeds: false,
+  },
+  {
+    id: "demo-mimi",
+    name: "Mimi",
+    species: AnimalSpecies.CAT,
+    sex: AnimalSex.FEMALE,
+    size: AnimalSize.SMALL,
+    approximateAge: "3 anos",
+    description: "Gata carinhosa, gosta de colo e rotina estavel.",
+    photoUrl:
+      "https://images.unsplash.com/photo-1533743983669-94fa5c4338ec?auto=format&fit=crop&w=900&q=80",
+    status: AnimalStatus.AVAILABLE,
+    specialNeeds: false,
+  },
 ];
+
+export const demoAnimals: AnimalSnapshot[] = demoAnimalProfiles.map(
+  (animal, index) => {
+    const timestamp = new Date(createdAt);
+    timestamp.setMinutes(timestamp.getMinutes() + index);
+
+    return {
+      ...animal,
+      createdAt: timestamp,
+      updatedAt: timestamp,
+    };
+  },
+);

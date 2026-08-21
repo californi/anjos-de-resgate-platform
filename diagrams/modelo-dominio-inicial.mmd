@@ -19,7 +19,14 @@ classDiagram
   }
 
   class AdoptionInterest {
-    <<future>>
+    +String id
+    +String animalId
+    +String requesterName
+    +String contact
+    +String message
+    +AdoptionInterestStatus status
+    +Date createdAt
+    +Date updatedAt
   }
 
   class Donation {
@@ -38,8 +45,8 @@ classDiagram
     <<future>>
   }
 
-  Adoptant "1" --> "0..*" AdoptionInterest : planned
-  Animal "1" --> "0..*" AdoptionInterest : planned
+  Adoptant "1" --> "0..*" AdoptionInterest : future
+  Animal "1" --> "0..*" AdoptionInterest : receives
   Animal "1" --> "0..*" Sponsorship : planned
   Campaign "1" --> "0..*" Donation : planned
   Partner "0..*" --> "0..*" Campaign : planned

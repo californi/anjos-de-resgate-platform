@@ -1,30 +1,32 @@
-# Prototipo 1 - Guia visual para validacao
+# Prototipo atual - Guia visual para validacao
 
-Documento resumido para a reuniao de validacao de funcionalidades de
-01/07/2026, seguindo o cronograma do projeto da Plataforma Anjos de Resgate.
+Documento resumido para reunioes de validacao de funcionalidades, seguindo o
+cronograma incremental da Plataforma Anjos de Resgate.
 
 ## Objetivo da validacao
 
-Validar se o Prototipo 1 comunica bem a proposta da plataforma e se a gestao
-inicial de animais atende ao fluxo minimo da ONG antes de avancar para o
-Prototipo 2, focado em adocao estilo Tinder.
+Validar se o portal comunica bem a proposta da plataforma, se o feed suporta
+muitos animais e se a gestao inicial de animais/interesses atende ao fluxo
+minimo da ONG antes de avancar para a adocao completa.
 
 ## Acessos rapidos
 
 Com o Docker Compose em execucao:
 
 ```bash
-docker compose up --build
+sh scripts/docker-prototype.sh up
 ```
 
-| Tela | Link local | Finalidade |
-|---|---|---|
-| Inicio | http://localhost:3000 | Apresentar a plataforma e destacar animais |
-| Sobre | http://localhost:3000/sobre | Explicar finalidade da ONG e do prototipo |
-| Contato | http://localhost:3000/contato | Mostrar canais iniciais de contato |
-| Animais | http://localhost:3000/animais | Listar animais disponiveis/publicados |
-| Detalhe do animal | http://localhost:3000/animais/demo-mel | Exibir perfil individual |
-| Admin | http://localhost:3000/admin/animais | Gerir cadastro e status de animais |
+| Tela              | Link local                                     | Finalidade                                 |
+| ----------------- | ---------------------------------------------- | ------------------------------------------ |
+| Inicio            | http://localhost:3000                          | Apresentar a plataforma e destacar animais |
+| Sobre             | http://localhost:3000/sobre                    | Explicar finalidade da ONG e do prototipo  |
+| Contato           | http://localhost:3000/contato                  | Mostrar canais iniciais de contato         |
+| Animais           | http://localhost:3000/animais                  | Mostrar feed compacto de animais           |
+| Detalhe do animal | http://localhost:3000/animais/demo-mel         | Exibir perfil individual                   |
+| Admin             | http://localhost:3000/admin/animais            | Ver inventario, interesses e status        |
+| Cadastro          | http://localhost:3000/admin/animais/cadastro   | Cadastrar novo animal                      |
+| Solicitacoes      | http://localhost:3000/admin/animais/interesses | Revisar interesses por animal              |
 
 Codigo administrativo simulado:
 
@@ -44,8 +46,11 @@ Resumo:
   animal, card reutilizavel, cadastro basico, API de animais e documentacao.
 - Implementado no Prototipo 1: pagina sobre, pagina de contato, login
   administrativo simulado, edicao de animais e execucao com Docker.
-- Proximo passo no cronograma: fluxo de adocao estilo Tinder, registro de
-  interesse, cadastro de adotante e painel de interessados.
+- Implementado no Prototipo 2.1: feed compacto para dezenas de animais,
+  registro publico de interesse em adocao, telas administrativas separadas e
+  quantidade de interesses por animal no inventario e nas solicitacoes.
+- Proximos passos no cronograma: experiencia estilo Tinder, cadastro de
+  adotante, triagem e fluxo completo de adocao.
 
 ## Arquitetura e infraestrutura
 
@@ -59,6 +64,12 @@ Como esta organizado:
 - Infraestrutura: Prisma, PostgreSQL, repositorio em memoria para prototipo e
   Docker Compose.
 - Evidencias: documentacao, ADRs, diagramas e registros ArcAssist-Web.
+- Interesse em adocao: entidade de dominio, API, persistencia e visualizacao
+  administrativa sem concluir adocao automaticamente.
+- Feed de muitos animais: tiles quadrados no publico, inventario compacto no
+  admin e seed ampliado para validar volume.
+- Contagem de interesses: aparece no resumo administrativo de cada animal e na
+  tela de solicitacoes.
 
 ## Funcionalidades para demonstrar
 
@@ -98,15 +109,16 @@ O que validar:
 
 <img src="assets/prototipo-1/03-contato.jpg" alt="Print da pagina contato" width="100%">
 
-### 4. Listagem publica de animais
+### 4. Feed publico de animais
 
 Link: http://localhost:3000/animais
 
 O que validar:
 
-- Os cards exibem as informacoes essenciais?
+- Os tiles exibem as informacoes essenciais?
 - Status, idade, porte e especie estao claros?
-- A lista ajuda a ONG a divulgar os animais?
+- O feed permite observar muitos animais sem cansar a leitura?
+- O formato quadrado e adequado para uma futura experiencia com midia/video?
 
 <img src="assets/prototipo-1/04-animais.jpg" alt="Print da listagem de animais" width="100%">
 
@@ -117,8 +129,9 @@ Link: http://localhost:3000/animais/demo-mel
 O que validar:
 
 - O perfil individual tem informacoes suficientes?
-- O botao `Tenho interesse` esta bem posicionado para a proxima iteracao?
-- Que campos devem entrar antes do fluxo de adocao?
+- O formulario `Tenho interesse` esta claro?
+- Os campos nome, contato e mensagem sao suficientes para iniciar retorno?
+- A mensagem deixa claro que a adocao ainda depende de avaliacao da equipe?
 
 <img src="assets/prototipo-1/05-detalhe-animal.jpg" alt="Print do detalhe do animal" width="100%">
 
@@ -149,16 +162,17 @@ O que validar:
 
 ## O que foi implementado tecnicamente
 
-| Area | Implementado | Arquivos principais |
-|---|---|---|
-| Web/PWA | Paginas inicio, sobre, contato, animais, detalhe e admin | `apps/web/src/app` |
-| Componentes | Card de animal, formulario, status updater e acesso admin | `apps/web/src/components`, `packages/ui` |
-| Conteudo | Textos, links e imagem principal centralizados para edicao por PR | `packages/shared/src/site-content.ts` |
-| API | CRUD inicial de animais e health check | `apps/api/src/animals`, `apps/api/src/health.controller.ts` |
-| Dominio | Entidade `Animal`, enums e validacoes basicas | `packages/domain/src/animal.ts` |
-| Dados | Prisma/PostgreSQL, SQLite opcional e seed | `apps/api/prisma` |
-| Docker | Web, API e Postgres em Compose | `docker-compose.yml`, `apps/*/Dockerfile` |
-| Evidencias | Registro ArcAssist-Web do incremento | `docs/15-prototipo-1-arcassist-web` |
+| Area        | Implementado                                                         | Arquivos principais                                                                                                                        |
+| ----------- | -------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------ |
+| Web/PWA     | Paginas inicio, sobre, contato, feed de animais, detalhe e admin     | `apps/web/src/app`                                                                                                                         |
+| Componentes | Card de animal, formulario, status updater e acesso admin            | `apps/web/src/components`, `packages/ui`                                                                                                   |
+| Conteudo    | Textos, links e imagem principal centralizados para edicao por PR    | `packages/shared/src/site-content.ts`                                                                                                      |
+| API         | CRUD inicial de animais e health check                               | `apps/api/src/animals`, `apps/api/src/health.controller.ts`                                                                                |
+| Interesses  | Registro publico, solicitacoes administrativas e contagem por animal | `apps/api/src/adoption-interests`, `apps/web/src/components/AdoptionInterestForm.tsx`, `apps/web/src/components/AdoptionInterestsList.tsx` |
+| Dominio     | Entidades `Animal` e `AdoptionInterest`, enums e validacoes basicas  | `packages/domain/src`                                                                                                                      |
+| Dados       | Prisma/PostgreSQL, SQLite opcional e seed com dezenas de animais     | `apps/api/prisma`, `packages/shared/src/demo-animals.ts`                                                                                   |
+| Docker      | Web, API e Postgres em Compose                                       | `docker-compose.yml`, `apps/*/Dockerfile`                                                                                                  |
+| Evidencias  | Registro ArcAssist-Web do incremento                                 | `docs/15-prototipo-1-arcassist-web`                                                                                                        |
 
 ## O que ainda falta
 
@@ -168,10 +182,13 @@ Ainda nao foi implementado:
 - permissoes por perfil;
 - auditoria administrativa;
 - upload de imagem;
+- upload e gestao real de videos;
 - filtros avancados de animais;
+- paginacao para grandes volumes;
 - fluxo completo de adocao;
-- registro persistente de interesse;
 - experiencia estilo Tinder;
+- cadastro completo de adotantes;
+- triagem de adotantes;
 - painel administrativo para editar textos e imagens do portal;
 - doacoes e apadrinhamento;
 - campanhas e parcerias;
@@ -181,18 +198,20 @@ Ainda nao foi implementado:
 
 1. Abrir a tela inicial e explicar o objetivo do Prototipo 1.
 2. Passar por Sobre e Contato para validar o portal institucional.
-3. Abrir a listagem e o detalhe de um animal.
+3. Abrir o feed compacto e o detalhe de um animal.
 4. Entrar no admin com `anjos2026`.
-5. Cadastrar ou editar um animal de exemplo.
-6. Alterar o status de um animal.
-7. Registrar feedbacks em `docs/06-validacoes.md`.
-8. Decidir prioridades para o Prototipo 2.
+5. Abrir a tela de solicitacoes e conferir interesses por animal.
+6. Cadastrar um animal na tela propria.
+7. Editar um animal pelo inventario.
+8. Alterar o status de um animal.
+9. Registrar feedbacks em `docs/06-validacoes.md`.
+10. Decidir prioridades para o Prototipo 2.
 
 ## Evidencias ja registradas
 
 - Build Docker das imagens `api` e `web`.
 - Execucao com PostgreSQL, API e Web.
 - API validada via `/health`.
-- Seed validado com 3 animais: Luna, Bento e Mel.
+- Seed inicial agora preparado com dezenas de animais ficticios.
 - Web validada com resposta HTTP 200 dentro do container.
 - Registro em `docs/15-prototipo-1-arcassist-web/run-log.md`.

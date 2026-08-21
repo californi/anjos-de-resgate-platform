@@ -27,7 +27,13 @@ body {
   background: var(--background);
   color: var(--foreground);
   font-family:
-    Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    Inter,
+    ui-sans-serif,
+    system-ui,
+    -apple-system,
+    BlinkMacSystemFont,
+    "Segoe UI",
+    sans-serif;
 }
 
 a {
@@ -298,6 +304,134 @@ textarea {
   grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
 }
 
+.animal-feed-shell {
+  display: grid;
+  gap: 1rem;
+}
+
+.animal-feed-summary {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.65rem;
+  color: var(--muted);
+}
+
+.animal-feed-summary strong,
+.animal-feed-summary span {
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  background: white;
+  padding: 0.45rem 0.7rem;
+}
+
+.animal-feed-summary strong {
+  color: var(--primary-dark);
+}
+
+.animal-feed {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+  gap: 0.85rem;
+}
+
+.animal-tile {
+  overflow: hidden;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: white;
+  min-width: 0;
+}
+
+.animal-tile__media {
+  position: relative;
+  display: block;
+  aspect-ratio: 1;
+  overflow: hidden;
+  background: #e7f6f0;
+}
+
+.animal-tile__media img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 180ms ease;
+}
+
+.animal-tile:hover .animal-tile__media img {
+  transform: scale(1.04);
+}
+
+.animal-tile__status {
+  position: absolute;
+  left: 0.55rem;
+  right: 0.55rem;
+  bottom: 0.55rem;
+  border-radius: 999px;
+  background: rgb(255 255 255 / 0.92);
+  color: var(--primary-dark);
+  padding: 0.32rem 0.5rem;
+  font-size: 0.74rem;
+  font-weight: 800;
+  text-align: center;
+}
+
+.animal-tile__body {
+  display: flex;
+  align-items: start;
+  justify-content: space-between;
+  gap: 0.45rem;
+  padding: 0.75rem 0.75rem 0.4rem;
+}
+
+.animal-tile__body p,
+.animal-tile__body h2 {
+  margin: 0;
+}
+
+.animal-tile__body p {
+  color: var(--primary);
+  font-size: 0.72rem;
+  font-weight: 800;
+  text-transform: uppercase;
+}
+
+.animal-tile__body h2 {
+  overflow: hidden;
+  font-size: 1.05rem;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.animal-tile__body span {
+  flex: 0 0 auto;
+  color: var(--muted);
+  font-size: 0.78rem;
+  font-weight: 700;
+}
+
+.animal-tile__actions {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.45rem;
+  padding: 0 0.75rem 0.75rem;
+}
+
+.animal-tile__actions a {
+  border-radius: 8px;
+  background: #f2fbf8;
+  color: var(--primary-dark);
+  padding: 0.5rem;
+  font-size: 0.78rem;
+  font-weight: 800;
+  text-align: center;
+}
+
+.animal-tile__actions a:last-child {
+  background: var(--primary);
+  color: white;
+}
+
 .animal-card {
   display: grid;
   overflow: hidden;
@@ -403,6 +537,36 @@ textarea {
 .admin-grid {
   grid-template-columns: minmax(280px, 0.85fr) minmax(0, 1.4fr);
   align-items: start;
+}
+
+.admin-section-nav {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-bottom: 1rem;
+}
+
+.admin-section-nav a {
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: white;
+  color: var(--primary-dark);
+  padding: 0.65rem 0.85rem;
+  font-weight: 800;
+}
+
+.admin-section-nav a.active,
+.admin-section-nav a[aria-current="page"] {
+  border-color: var(--primary);
+  background: #e7f6f0;
+  color: var(--primary-dark);
+}
+
+.admin-toolbar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  margin-bottom: 1rem;
 }
 
 .panel {
@@ -524,6 +688,159 @@ textarea {
   gap: 0.9rem;
 }
 
+.admin-inventory {
+  display: grid;
+  gap: 0.65rem;
+}
+
+.admin-inventory-item {
+  display: grid;
+  grid-template-columns: 68px minmax(0, 1fr) minmax(110px, auto) minmax(
+      180px,
+      260px
+    );
+  gap: 0.75rem;
+  align-items: center;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: white;
+  padding: 0.65rem;
+}
+
+.admin-animal-thumb {
+  width: 68px;
+  aspect-ratio: 1;
+  border-radius: 8px;
+  object-fit: cover;
+}
+
+.admin-animal-summary {
+  min-width: 0;
+}
+
+.admin-animal-summary p,
+.admin-animal-summary h3 {
+  margin: 0;
+}
+
+.admin-animal-summary p {
+  color: var(--primary);
+  font-size: 0.74rem;
+  font-weight: 800;
+  text-transform: uppercase;
+}
+
+.admin-animal-summary h3 {
+  overflow: hidden;
+  font-size: 1.05rem;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.admin-animal-summary span {
+  color: var(--muted);
+  font-size: 0.9rem;
+}
+
+.admin-animal-facts {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+  margin-top: 0.45rem;
+}
+
+.admin-animal-facts span,
+.admin-animal-facts a {
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: #f2fbf8;
+  color: var(--primary-dark);
+  padding: 0.35rem 0.5rem;
+  font-size: 0.78rem;
+  font-weight: 800;
+  line-height: 1.2;
+}
+
+.admin-animal-facts a {
+  border-color: rgb(33 135 103 / 0.28);
+  background: #e7f6f0;
+}
+
+.admin-status-pill {
+  border-radius: 999px;
+  background: #e7f6f0;
+  color: var(--primary-dark);
+  padding: 0.4rem 0.55rem;
+  font-size: 0.78rem;
+  font-weight: 800;
+  text-align: center;
+}
+
+.admin-inventory-actions {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: 0.5rem;
+  align-items: center;
+}
+
+.admin-inventory-actions .button-link {
+  padding: 0.7rem 0.8rem;
+  text-align: center;
+}
+
+.interest-list {
+  display: grid;
+  gap: 0.9rem;
+}
+
+.interest-dashboard {
+  display: grid;
+  gap: 1rem;
+}
+
+.interest-summary-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+  gap: 0.75rem;
+}
+
+.interest-summary-card {
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: white;
+  padding: 0.9rem;
+}
+
+.interest-summary-card strong {
+  display: block;
+  color: var(--primary-dark);
+  font-size: 2rem;
+  line-height: 1;
+}
+
+.interest-summary-card span,
+.interest-summary-card small {
+  display: block;
+  color: var(--muted);
+  line-height: 1.5;
+}
+
+.interest-item {
+  display: flex;
+  align-items: start;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.interest-item h3 {
+  margin-bottom: 0.4rem;
+}
+
+.interest-item small {
+  color: var(--muted);
+  white-space: nowrap;
+}
+
 .admin-item {
   display: grid;
   grid-template-columns: minmax(0, 1fr) minmax(160px, 220px);
@@ -563,6 +880,23 @@ textarea {
     grid-template-columns: 1fr;
   }
 
+  .admin-inventory-item {
+    grid-template-columns: 56px minmax(0, 1fr);
+  }
+
+  .admin-animal-thumb {
+    width: 56px;
+  }
+
+  .admin-status-pill,
+  .admin-inventory-actions {
+    grid-column: 1 / -1;
+  }
+
+  .interest-item {
+    flex-direction: column;
+  }
+
   .feature-grid,
   .admin-grid,
   .detail-layout,
@@ -589,7 +923,8 @@ textarea {
 
   .form-row,
   .animal-card__actions,
-  .admin-item {
+  .admin-item,
+  .admin-inventory-actions {
     grid-template-columns: 1fr;
   }
 

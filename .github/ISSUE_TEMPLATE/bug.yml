@@ -1,0 +1,40 @@
+name: Problema tecnico
+description: Relatar erro de execucao, build, API ou comportamento inesperado.
+title: "[Bug] "
+labels:
+  - bug
+body:
+  - type: textarea
+    id: descricao
+    attributes:
+      label: Descricao do problema
+      description: Explique o erro observado.
+    validations:
+      required: true
+  - type: textarea
+    id: reproduzir
+    attributes:
+      label: Passos para reproduzir
+      placeholder: |
+        1. Executei docker compose up --build
+        2. Acessei ...
+        3. Cliquei em ...
+    validations:
+      required: true
+  - type: textarea
+    id: esperado
+    attributes:
+      label: Comportamento esperado
+    validations:
+      required: true
+  - type: textarea
+    id: ambiente
+    attributes:
+      label: Ambiente
+      description: Sistema operacional, navegador, Docker, Node/pnpm, se souber.
+  - type: textarea
+    id: logs
+    attributes:
+      label: Logs ou prints
+      description: Cole logs relevantes sem dados sensiveis.
+      render: shell

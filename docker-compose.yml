@@ -1,7 +1,6 @@
 services:
   postgres:
     image: postgres:16-alpine
-    container_name: anjos-de-resgate-postgres
     environment:
       POSTGRES_DB: anjos_de_resgate
       POSTGRES_USER: anjos
@@ -20,7 +19,6 @@ services:
     build:
       context: .
       dockerfile: apps/api/Dockerfile
-    container_name: anjos-de-resgate-api
     environment:
       DATABASE_URL: postgresql://anjos:anjos@postgres:5432/anjos_de_resgate?schema=public
       CORS_ORIGIN: http://localhost:3000
@@ -30,6 +28,16 @@ services:
         condition: service_healthy
     ports:
       - "3333:3333"
+    healthcheck:
+      test:
+        [
+          "CMD-SHELL",
+          "node -e \"fetch('http://localhost:3333/health').then((r)=>process.exit(r.ok?0:1)).catch(()=>process.exit(1))\""
+        ]
+      interval: 5s
+      timeout: 5s
+      retries: 12
+      start_period: 20s
     command: >
       sh -c "pnpm --filter @anjos/api db:push &&
              pnpm --filter @anjos/api db:seed &&
@@ -41,16 +49,26 @@ services:
       dockerfile: apps/web/Dockerfile
       args:
         NEXT_PUBLIC_API_URL: http://localhost:3333
-    container_name: anjos-de-resgate-web
     environment:
       API_INTERNAL_URL: http://api:3333
       NEXT_PUBLIC_API_URL: http://localhost:3333
       NEXT_PUBLIC_ADMIN_ACCESS_CODE: anjos2026
       PORT: 3000
     depends_on:
-      - api
+      api:
+        condition: service_healthy
     ports:
       - "3000:3000"
+    healthcheck:
+      test:
+        [
+          "CMD-SHELL",
+          "node -e \"fetch('http://localhost:3000').then((r)=>process.exit(r.ok?0:1)).catch(()=>process.exit(1))\""
+        ]
+      interval: 10s
+      timeout: 5s
+      retries: 12
+      start_period: 20s
 
 volumes:
   postgres_data:

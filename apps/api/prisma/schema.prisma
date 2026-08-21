@@ -33,20 +33,44 @@ enum AnimalSize {
   UNKNOWN
 }
 
+enum AdoptionInterestStatus {
+  RECEIVED
+  CONTACTED
+  ARCHIVED
+}
+
 model Animal {
-  id             String        @id @default(uuid())
+  id             String             @id @default(uuid())
   name           String
   species        AnimalSpecies
-  sex            AnimalSex     @default(UNKNOWN)
-  size           AnimalSize    @default(UNKNOWN)
+  sex            AnimalSex          @default(UNKNOWN)
+  size           AnimalSize         @default(UNKNOWN)
   approximateAge String
   description    String
   photoUrl       String?
-  status         AnimalStatus  @default(AVAILABLE)
-  specialNeeds   Boolean       @default(false)
-  createdAt      DateTime      @default(now())
-  updatedAt      DateTime      @updatedAt
+  status         AnimalStatus       @default(AVAILABLE)
+  specialNeeds   Boolean            @default(false)
+  createdAt      DateTime           @default(now())
+  updatedAt      DateTime           @updatedAt
+  interests      AdoptionInterest[]
 
   @@index([status])
   @@index([species])
+}
+
+model AdoptionInterest {
+  id            String                 @id @default(uuid())
+  animalId      String
+  requesterName String
+  contact       String
+  message       String?
+  status        AdoptionInterestStatus @default(RECEIVED)
+  createdAt     DateTime               @default(now())
+  updatedAt     DateTime               @updatedAt
+
+  animal Animal @relation(fields: [animalId], references: [id], onDelete: Cascade)
+
+  @@index([animalId])
+  @@index([status])
+  @@index([createdAt])
 }

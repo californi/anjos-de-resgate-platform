@@ -43,11 +43,35 @@ O Prototipo 1 amplia a primeira base sem implementar ainda o fluxo completo de a
 - Execucao orientada por Docker com Web, API e PostgreSQL.
 - Conteudo textual e imagem principal centralizados em arquivo compartilhado.
 
+## Escopo do Prototipo 2.1 - interesse inicial em adocao
+
+Este incremento inicia o Prototipo 2 sem implementar ainda a experiencia Tinder
+nem o processo completo de adocao:
+
+- Feed publico compacto para visualizar dezenas de animais.
+- Seed ampliado com dezenas de animais ficticios para validacao de volume.
+- Formulario publico de interesse no detalhe de animal.
+- Registro persistente de interesse vinculado ao animal.
+- Regra de aplicacao: interesse so fica bloqueado para animal em
+  `IN_ADOPTION_PROCESS`.
+- Telas administrativas separadas para inventario, cadastro, edicao e
+  solicitacoes de interesse.
+- Listagem administrativa dos interesses recebidos com quantidade por animal.
+- Quantidade de interesses exibida junto ao resumo de cada animal no inventario
+  administrativo.
+- Lista administrativa compacta para gestao de muitos animais.
+- Status inicial de interesse como `RECEIVED`, preservando revisao humana pela
+  equipe.
+
 ## Fora do escopo nesta iteracao
 
 - Autenticacao real.
 - Processo completo de adocao.
 - Experiencia Tinder/swipe.
+- Triagem completa de adotantes.
+- Mudanca automatica de status do animal apos interesse.
+- Upload e gestao real de videos.
+- Paginacao, busca e filtros avancados.
 - Pagamentos ou doacoes.
 - Apadrinhamento.
 - Campanhas e parcerias.

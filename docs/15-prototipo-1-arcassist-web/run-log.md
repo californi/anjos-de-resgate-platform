@@ -86,6 +86,11 @@ ArcAssist-Web traceability evidence for later analysis.
 - Prepared `github-ready/anjos-de-resgate-platform` as a lean folder for GitHub
   Desktop, containing project source, operational documentation, ADRs,
   validation evidence, diagrams, prompts and collaboration templates.
+- Removed fixed Docker `container_name` entries to reduce conflicts when the
+  prototype is executed from different local folders, such as the working tree
+  and the GitHub-ready export.
+- Updated the Docker execution guide with troubleshooting instructions for
+  container-name and port conflicts.
 
 ### Architectural decisions and traceability
 
@@ -98,6 +103,8 @@ ArcAssist-Web traceability evidence for later analysis.
   meetings.
 - The exported GitHub-ready folder separates collaborative project material
   from local research outputs and generated build artifacts.
+- The Docker Compose configuration now relies on Compose project scoping for
+  container names instead of globally fixed container names.
 
 ### Validation performed
 
@@ -117,3 +124,54 @@ ArcAssist-Web traceability evidence for later analysis.
 - Confirm the final GitHub file set with `git status` after initialization.
 - Use Issues during the next validation meeting to record content, interface
   and workflow feedback.
+
+## 2026-08-20
+
+### Objective
+
+Prepare the next functional iteration using the ArcAssist-Web articles as
+conceptual grounding while keeping the project incremental and traceable.
+
+### Inputs inspected
+
+- `WebMedia2026_ArcAssist_WEB_CameraReady.pdf`.
+- `WBOTS2026_ArcAssist_WebBot_CameraReady (6).pdf`.
+- Current backlog, scope, architecture and domain documentation.
+- Existing Animals module implementation.
+- Current Prisma schema, Web detail page and admin page.
+
+### Changes produced
+
+- Added `AdoptionInterest` to the domain model.
+- Added Prisma persistence for adoption interests.
+- Added `adoption-interests` API module with DTOs, service and repositories.
+- Added public interest form on the animal detail page.
+- Added administrative list of adoption interests.
+- Added tests for accepting interest only when the animal is available.
+- Added ADR-005 and a Prototipo 2.1 evidence dossier.
+- Updated scope, architecture, backlog, prototype, prompt, domain and diagram
+  documentation.
+
+### Architectural decisions and traceability
+
+- ADR-005 records the decision to keep adoption interest as a pre-review
+  artifact, not an automatic adoption decision.
+- The increment preserves the boundary between public animal data and private
+  requester data.
+- The implementation follows the same layering already used by the Animals
+  module: interface, application service, domain entity, repository contract and
+  Prisma/in-memory infrastructure.
+
+### Validation performed
+
+- Regenerated Prisma Client from `apps/api/prisma/schema.prisma`.
+- Ran TypeScript validation for `packages/domain`, `packages/shared`,
+  `apps/api` and `apps/web`.
+- Ran focused API/domain service tests for animals and adoption interests.
+
+### Pending validation
+
+- Run `docker compose up --build` and exercise the new flow in the browser.
+- Run `pnpm --filter @anjos/api db:push` in the Docker API startup path to
+  create the new table in PostgreSQL.
+- Capture updated screenshots for the Prototipo 2.1 validation guide.

@@ -1,0 +1,57 @@
+name: Ajuste de conteudo
+description: Sugerir alteracao de textos, links, canais de contato ou imagens do portal.
+title: "[Conteudo] "
+labels:
+  - melhoria
+  - documentacao
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Use este formulario para sugerir mudancas no conteudo publico do portal.
+        Nao inclua dados pessoais reais.
+  - type: dropdown
+    id: pagina
+    attributes:
+      label: Pagina ou area afetada
+      options:
+        - Inicio
+        - Sobre
+        - Contato
+        - Navegacao
+        - Imagem principal
+        - Outro
+    validations:
+      required: true
+  - type: dropdown
+    id: tipo
+    attributes:
+      label: Tipo de ajuste
+      options:
+        - Texto
+        - Link
+        - Canal de contato
+        - Imagem
+        - Nome ou rotulo
+        - Outro
+    validations:
+      required: true
+  - type: textarea
+    id: atual
+    attributes:
+      label: Conteudo atual
+      description: Informe o texto, link ou imagem que deve ser alterado.
+    validations:
+      required: true
+  - type: textarea
+    id: proposto
+    attributes:
+      label: Conteudo proposto
+      description: Escreva exatamente como o novo conteudo deve aparecer.
+    validations:
+      required: true
+  - type: textarea
+    id: motivo
+    attributes:
+      label: Motivo da mudanca
+      description: Explique por que essa alteracao melhora a validacao ou o uso pela ONG.

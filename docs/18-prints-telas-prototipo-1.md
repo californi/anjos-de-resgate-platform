@@ -5,15 +5,18 @@ da Plataforma Anjos de Resgate, em 01/07/2026.
 
 ## Acessos rapidos
 
-| # | Tela | Link da pagina | Arquivo do print | Objetivo da validacao |
-|---|---|---|---|---|
-| 1 | Inicio | http://localhost:3000 | [01-home.jpg](assets/prototipo-1/01-home.jpg) | Validar primeira impressao e chamada para animais/admin |
-| 2 | Sobre | http://localhost:3000/sobre | [02-sobre.jpg](assets/prototipo-1/02-sobre.jpg) | Validar texto institucional e finalidade do prototipo |
-| 3 | Contato | http://localhost:3000/contato | [03-contato.jpg](assets/prototipo-1/03-contato.jpg) | Validar canais de contato e formulario futuro |
-| 4 | Animais | http://localhost:3000/animais | [04-animais.jpg](assets/prototipo-1/04-animais.jpg) | Validar listagem publica e informacoes dos cards |
-| 5 | Detalhe do animal | http://localhost:3000/animais/demo-mel | [05-detalhe-animal.jpg](assets/prototipo-1/05-detalhe-animal.jpg) | Validar perfil individual e ponto futuro de interesse |
-| 6 | Acesso admin | http://localhost:3000/admin/animais | [06-admin-acesso.jpg](assets/prototipo-1/06-admin-acesso.jpg) | Validar acesso administrativo simulado |
-| 7 | Painel admin | http://localhost:3000/admin/animais | [07-admin-painel.jpg](assets/prototipo-1/07-admin-painel.jpg) | Validar cadastro, edicao e status de animais |
+| #   | Tela               | Link da pagina                                      | Arquivo do print                                                      | Objetivo da validacao                                   |
+| --- | ------------------ | --------------------------------------------------- | --------------------------------------------------------------------- | ------------------------------------------------------- |
+| 1   | Inicio             | http://localhost:3000                               | [01-home.jpg](assets/prototipo-1/01-home.jpg)                         | Validar primeira impressao e chamada para animais/admin |
+| 2   | Sobre              | http://localhost:3000/sobre                         | [02-sobre.jpg](assets/prototipo-1/02-sobre.jpg)                       | Validar texto institucional e finalidade do prototipo   |
+| 3   | Contato            | http://localhost:3000/contato                       | [03-contato.jpg](assets/prototipo-1/03-contato.jpg)                   | Validar canais de contato e formulario futuro           |
+| 4   | Animais            | http://localhost:3000/animais                       | [04-animais.jpg](assets/prototipo-1/04-animais.jpg)                   | Validar feed compacto e muitos animais                  |
+| 5   | Detalhe do animal  | http://localhost:3000/animais/demo-mel              | [05-detalhe-animal.jpg](assets/prototipo-1/05-detalhe-animal.jpg)     | Validar perfil individual e interesse inicial           |
+| 6   | Acesso admin       | http://localhost:3000/admin/animais                 | [06-admin-acesso.jpg](assets/prototipo-1/06-admin-acesso.jpg)         | Validar acesso administrativo simulado                  |
+| 7   | Inventario admin   | http://localhost:3000/admin/animais                 | [07-admin-painel.jpg](assets/prototipo-1/07-admin-painel.jpg)         | Validar lista compacta e status de animais              |
+| 8   | Cadastro admin     | http://localhost:3000/admin/animais/cadastro        | [08-admin-cadastro.jpg](assets/prototipo-1/08-admin-cadastro.jpg)     | Validar tela dedicada de cadastro                       |
+| 9   | Edicao admin       | http://localhost:3000/admin/animais/demo-mel/editar | [09-admin-edicao.jpg](assets/prototipo-1/09-admin-edicao.jpg)         | Validar tela dedicada de edicao                         |
+| 10  | Solicitacoes admin | http://localhost:3000/admin/animais/interesses      | [10-admin-interesses.jpg](assets/prototipo-1/10-admin-interesses.jpg) | Validar contagem de interesses por animal               |
 
 Codigo administrativo simulado:
 
@@ -73,9 +76,9 @@ Arquivo do print: [assets/prototipo-1/04-animais.jpg](assets/prototipo-1/04-anim
 
 Pontos para validar:
 
-- Os cards mostram as informacoes essenciais?
+- Os tiles mostram as informacoes essenciais?
 - Status, especie, idade e porte estao claros?
-- A listagem ajuda na divulgacao dos animais?
+- O feed ajuda a navegar por muitos animais?
 
 <img src="assets/prototipo-1/04-animais.jpg" alt="Print da listagem de animais" width="100%">
 
@@ -89,7 +92,7 @@ Pontos para validar:
 
 - O perfil individual tem campos suficientes?
 - O botao `Tenho interesse` esta bem posicionado?
-- Que informacoes devem entrar antes do fluxo de adocao?
+- O formulario de interesse inicial esta claro?
 
 <img src="assets/prototipo-1/05-detalhe-animal.jpg" alt="Print do detalhe do animal" width="100%">
 
@@ -107,7 +110,7 @@ Pontos para validar:
 
 <img src="assets/prototipo-1/06-admin-acesso.jpg" alt="Print do acesso administrativo" width="100%">
 
-## 7. Painel administrativo
+## 7. Inventario administrativo
 
 Link da pagina: http://localhost:3000/admin/animais  
 Arquivo do print:
@@ -115,9 +118,42 @@ Arquivo do print:
 
 Pontos para validar:
 
-- O cadastro tem os campos minimos corretos?
-- A edicao de animais esta intuitiva?
+- A lista compacta facilita gerir muitos animais?
+- A contagem de interesses no resumo de cada animal ajuda a priorizar retornos?
 - A alteracao de status cobre a rotina atual?
 - Falta upload de imagem, filtro ou algum campo essencial?
 
 <img src="assets/prototipo-1/07-admin-painel.jpg" alt="Print do painel administrativo" width="100%">
+
+## 8. Cadastro administrativo
+
+Link da pagina: http://localhost:3000/admin/animais/cadastro
+Arquivo do print:
+[assets/prototipo-1/08-admin-cadastro.jpg](assets/prototipo-1/08-admin-cadastro.jpg)
+
+Pontos para validar:
+
+- A tela dedicada reduz confusao no cadastro?
+- Os campos continuam adequados para a rotina da ONG?
+
+## 9. Edicao administrativa
+
+Link da pagina: http://localhost:3000/admin/animais/demo-mel/editar
+Arquivo do print:
+[assets/prototipo-1/09-admin-edicao.jpg](assets/prototipo-1/09-admin-edicao.jpg)
+
+Pontos para validar:
+
+- A edicao em tela propria esta mais clara?
+- O retorno para o inventario apos salvar e esperado?
+
+## 10. Solicitacoes de interesse
+
+Link da pagina: http://localhost:3000/admin/animais/interesses
+Arquivo do print:
+[assets/prototipo-1/10-admin-interesses.jpg](assets/prototipo-1/10-admin-interesses.jpg)
+
+Pontos para validar:
+
+- A quantidade de interesses por animal ajuda a priorizar retornos?
+- Os dados da solicitacao sao suficientes para a equipe entrar em contato?

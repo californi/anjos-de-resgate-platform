@@ -4,15 +4,18 @@ import {
   animalSizeLabels,
   animalSpeciesLabels,
   animalStatusLabels,
-  defaultAnimalPhotoUrl
+  defaultAnimalPhotoUrl,
 } from "@anjos/shared";
+import { AdoptionInterestForm } from "@/components/AdoptionInterestForm";
 import { getAnimalById } from "@/lib/api";
 
 type AnimalDetailPageProps = {
   params: Promise<{ id: string }>;
 };
 
-export default async function AnimalDetailPage({ params }: AnimalDetailPageProps) {
+export default async function AnimalDetailPage({
+  params,
+}: AnimalDetailPageProps) {
   const { id } = await params;
   const animal = await getAnimalById(id);
 
@@ -29,7 +32,10 @@ export default async function AnimalDetailPage({ params }: AnimalDetailPageProps
       </div>
 
       <section className="section detail-layout">
-        <img src={animal.photoUrl ?? defaultAnimalPhotoUrl} alt={`Foto de ${animal.name}`} />
+        <img
+          src={animal.photoUrl ?? defaultAnimalPhotoUrl}
+          alt={`Foto de ${animal.name}`}
+        />
         <div className="panel">
           <h2>Informacoes principais</h2>
           <p>
@@ -48,10 +54,11 @@ export default async function AnimalDetailPage({ params }: AnimalDetailPageProps
             <strong>Status:</strong> {animalStatusLabels[animal.status]}
           </p>
           <p>
-            <strong>Necessidades especiais:</strong> {animal.specialNeeds ? "Sim" : "Nao"}
+            <strong>Necessidades especiais:</strong>{" "}
+            {animal.specialNeeds ? "Sim" : "Nao"}
           </p>
           <div className="page-actions">
-            <a className="button-link" href="#interesse-futuro">
+            <a className="button-link" href="#interesse">
               Tenho interesse
             </a>
             <a className="button-link secondary" href="/animais">
@@ -59,6 +66,14 @@ export default async function AnimalDetailPage({ params }: AnimalDetailPageProps
             </a>
           </div>
         </div>
+      </section>
+
+      <section className="section compact-section">
+        <AdoptionInterestForm
+          animalId={animal.id}
+          animalName={animal.name}
+          animalStatus={animal.status}
+        />
       </section>
     </main>
   );

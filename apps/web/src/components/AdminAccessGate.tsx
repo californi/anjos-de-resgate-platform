@@ -21,7 +21,8 @@ export function AdminAccessGate({ children }: AdminAccessGateProps) {
 
   function handleSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
-    const expectedCode = process.env.NEXT_PUBLIC_ADMIN_ACCESS_CODE ?? DEFAULT_CODE;
+    const expectedCode =
+      process.env.NEXT_PUBLIC_ADMIN_ACCESS_CODE ?? DEFAULT_CODE;
 
     if (code.trim() === expectedCode) {
       window.localStorage.setItem(STORAGE_KEY, "granted");
@@ -43,8 +44,9 @@ export function AdminAccessGate({ children }: AdminAccessGateProps) {
     return (
       <div className="admin-gate">
         <div className="prototype-note">
-          <strong>Acesso administrativo simulado.</strong> Esta barreira existe apenas para
-          validacao do Prototipo 1; autenticacao real entra em iteracao futura.
+          <strong>Acesso administrativo simulado.</strong> Esta barreira existe
+          apenas para validacao do prototipo; autenticacao real entra em
+          iteracao futura.
           <button type="button" onClick={handleExit}>
             Sair do modo admin
           </button>
@@ -60,7 +62,8 @@ export function AdminAccessGate({ children }: AdminAccessGateProps) {
         <p className="eyebrow">Acesso administrativo</p>
         <h2>Entrar no painel do prototipo</h2>
         <p className="muted">
-          Use o codigo de validacao local para acessar o cadastro e a edicao de animais.
+          Use o codigo de validacao local para acessar o cadastro, a edicao e as
+          solicitacoes de interesse.
         </p>
         <form className="form" onSubmit={handleSubmit}>
           <label>

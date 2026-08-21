@@ -1,0 +1,63 @@
+name: Validacao funcional
+description: Registrar feedback obtido ao testar uma tela ou fluxo do prototipo.
+title: "[Validacao] "
+labels:
+  - validacao
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Use este formulario para registrar percepcoes de validacao do prototipo.
+        Nao inclua dados pessoais reais.
+  - type: dropdown
+    id: area
+    attributes:
+      label: Area avaliada
+      options:
+        - Portal inicial
+        - Sobre
+        - Contato
+        - Listagem de animais
+        - Detalhe do animal
+        - Admin de animais
+        - Docker/execucao
+        - Documentacao
+        - Outro
+    validations:
+      required: true
+  - type: textarea
+    id: passos
+    attributes:
+      label: O que foi testado?
+      description: Descreva os passos executados.
+      placeholder: "Ex.: Acessei /animais, abri o animal Mel e cliquei em Tenho interesse."
+    validations:
+      required: true
+  - type: textarea
+    id: resultado
+    attributes:
+      label: Resultado observado
+      description: O que aconteceu? Ficou claro? Houve problema?
+    validations:
+      required: true
+  - type: textarea
+    id: esperado
+    attributes:
+      label: Resultado esperado ou sugestao
+      description: Como voce esperava que funcionasse?
+  - type: dropdown
+    id: prioridade
+    attributes:
+      label: Prioridade percebida
+      options:
+        - Baixa
+        - Media
+        - Alta
+        - Bloqueante para validacao
+    validations:
+      required: true
+  - type: textarea
+    id: evidencias
+    attributes:
+      label: Evidencias
+      description: Anexe prints ou links, se houver.

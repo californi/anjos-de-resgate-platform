@@ -1,0 +1,45 @@
+name: Sugestao de melhoria
+description: Propor melhoria de interface, texto, fluxo, documentacao ou regra.
+title: "[Sugestao] "
+labels:
+  - melhoria
+body:
+  - type: textarea
+    id: problema
+    attributes:
+      label: Problema ou oportunidade
+      description: O que poderia melhorar?
+    validations:
+      required: true
+  - type: textarea
+    id: proposta
+    attributes:
+      label: Proposta de melhoria
+      description: Descreva a solucao desejada de forma objetiva.
+    validations:
+      required: true
+  - type: dropdown
+    id: tipo
+    attributes:
+      label: Tipo de melhoria
+      options:
+        - Texto/conteudo
+        - Interface visual
+        - Fluxo de uso
+        - Campo ou dado exibido
+        - Regra de negocio
+        - Documentacao
+        - Infraestrutura/execucao
+        - Outro
+    validations:
+      required: true
+  - type: textarea
+    id: impacto
+    attributes:
+      label: Impacto esperado
+      description: Como isso ajuda a ONG, voluntarios ou adotantes?
+  - type: textarea
+    id: observacoes
+    attributes:
+      label: Observacoes adicionais
+      description: Inclua exemplos, prints ou referencias, se houver.

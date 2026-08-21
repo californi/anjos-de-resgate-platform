@@ -48,7 +48,6 @@ Campos iniciais:
 ## Entidades futuras
 
 - `Adoptant`
-- `AdoptionInterest`
 - `Donation`
 - `Sponsorship`
 - `Campaign`
@@ -56,3 +55,30 @@ Campos iniciais:
 - `User`
 - `Role`
 - `Report`
+
+## Entidade AdoptionInterest
+
+Campos iniciais:
+
+- `id`
+- `animalId`
+- `requesterName`
+- `contact`
+- `message`
+- `status`
+- `createdAt`
+- `updatedAt`
+
+`AdoptionInterestStatus`:
+
+- `RECEIVED`
+- `CONTACTED`
+- `ARCHIVED`
+
+Regras atuais:
+
+- Um interesse pertence a um animal.
+- O registro publico so e bloqueado quando o animal esta
+  `IN_ADOPTION_PROCESS`.
+- O interesse inicia como `RECEIVED`.
+- O interesse nao altera automaticamente o status do animal.

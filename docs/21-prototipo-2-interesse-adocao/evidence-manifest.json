@@ -1,0 +1,67 @@
+{
+  "increment": "prototipo-2.1",
+  "target": "interesse-inicial-adocao",
+  "date": "2026-08-20",
+  "baseline": {
+    "implemented_modules": ["Animals", "Portal", "Admin simulated access"],
+    "web": "apps/web",
+    "api": "apps/api",
+    "domain": "packages/domain",
+    "shared": "packages/shared",
+    "ui": "packages/ui"
+  },
+  "evolution_concern": "Allow a visitor to register initial adoption interest from an animal profile while keeping adoption acceptance under human review.",
+  "literature_grounding": [
+    "ArcAssist-Web logical reference architecture: evidence-grounded Web architectural evolution",
+    "ArcAssist-Web Bot: decision-support bot prepares decision material and preserves architect review"
+  ],
+  "web_and_domain_context": {
+    "interaction_flow": "animal profile -> interest form -> API registration -> administrative review",
+    "public_data": ["animal profile", "animal status"],
+    "private_data": ["requesterName", "contact", "message"],
+    "domain_rule": "Public adoption interest is blocked only when the animal is IN_ADOPTION_PROCESS.",
+    "human_review_boundary": "Interest does not automatically approve adoption or change animal status.",
+    "volume_assumption": "The public and administrative interfaces must remain readable with dozens of animals."
+  },
+  "implemented_changes": [
+    "Added compact public animal feed with square media tiles.",
+    "Added compact administrative inventory for many animals.",
+    "Separated administrative screens for inventory, animal creation, animal editing, and interest requests.",
+    "Added administrative interest counts grouped by animal.",
+    "Displayed animal-level interest counts inside each administrative inventory row.",
+    "Changed interest eligibility to block only IN_ADOPTION_PROCESS.",
+    "Expanded shared demo animals and Prisma seed to dozens of fictitious records.",
+    "Added AdoptionInterest domain entity and status enum.",
+    "Added AdoptionInterest Prisma model.",
+    "Added adoption-interests API module with DTOs, service and repositories.",
+    "Added public AdoptionInterestForm in animal detail page.",
+    "Added administrative AdoptionInterestsList.",
+    "Added service tests for available and unavailable animals.",
+    "Prepared Docker execution script and service healthchecks for repeatable validation.",
+    "Updated scope, architecture, backlog, domain model, prototype docs, ADR and diagrams."
+  ],
+  "out_of_scope": [
+    "Real authentication",
+    "Role-based permissions",
+    "Formal privacy consent",
+    "Real video upload and storage",
+    "Pagination, search and advanced filters",
+    "Full adoptant profile",
+    "Adoption screening",
+    "Swipe/Tinder experience",
+    "Notifications",
+    "Automatic animal-status transition"
+  ],
+  "validation": {
+    "typecheck": ["packages/domain", "packages/shared", "apps/api", "apps/web"],
+    "tests": [
+      "apps/api/src/adoption-interests/adoption-interests.service.test.ts",
+      "apps/api/src/animals/animals.service.test.ts"
+    ],
+    "docker_execution_entrypoint": "sh scripts/docker-prototype.sh up",
+    "limitations": [
+      "Browser validation and screenshots for Prototipo 2.1 still pending.",
+      "The Docker startup path applies Prisma db push automatically, but the browser flow must still be manually exercised after startup."
+    ]
+  }
+}

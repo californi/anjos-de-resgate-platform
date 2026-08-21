@@ -9,8 +9,7 @@ const DEFAULT_CHROME =
 const chromePath = process.env.CHROME_PATH ?? DEFAULT_CHROME;
 const baseUrl = process.env.PROTOTYPE_URL ?? "http://localhost:3000";
 const outDir =
-  process.env.SCREENSHOT_DIR ??
-  path.resolve("docs/assets/prototipo-1");
+  process.env.SCREENSHOT_DIR ?? path.resolve("docs/assets/prototipo-1");
 const port = Number(process.env.CHROME_DEBUG_PORT ?? 9223);
 
 const pages = [
@@ -23,14 +22,32 @@ const pages = [
     file: "06-admin-acesso.jpg",
     path: "/admin/animais",
     height: 900,
-    adminAccess: "remove"
+    adminAccess: "remove",
   },
   {
     file: "07-admin-painel.jpg",
     path: "/admin/animais",
     height: 1400,
-    adminAccess: "grant"
-  }
+    adminAccess: "grant",
+  },
+  {
+    file: "08-admin-cadastro.jpg",
+    path: "/admin/animais/cadastro",
+    height: 1200,
+    adminAccess: "grant",
+  },
+  {
+    file: "09-admin-edicao.jpg",
+    path: "/admin/animais/demo-mel/editar",
+    height: 1200,
+    adminAccess: "grant",
+  },
+  {
+    file: "10-admin-interesses.jpg",
+    path: "/admin/animais/interesses",
+    height: 1200,
+    adminAccess: "grant",
+  },
 ];
 
 const wait = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
@@ -99,7 +116,7 @@ function createCdpClient(socketUrl) {
         const handler = (params) => {
           events.set(
             method,
-            (events.get(method) ?? []).filter((item) => item !== handler)
+            (events.get(method) ?? []).filter((item) => item !== handler),
           );
           resolve(params);
         };
@@ -108,7 +125,7 @@ function createCdpClient(socketUrl) {
     },
     close() {
       socket.close();
-    }
+    },
   };
 }
 
@@ -124,7 +141,7 @@ async function capture(client, item) {
     width: 1440,
     height: item.height,
     deviceScaleFactor: 1,
-    mobile: false
+    mobile: false,
   });
 
   await navigateAndWait(client, `${baseUrl}${item.path}`);
@@ -133,7 +150,7 @@ async function capture(client, item) {
     await client.send("Runtime.evaluate", {
       expression:
         'localStorage.removeItem("anjos-admin-prototype-access"); location.reload();',
-      awaitPromise: false
+      awaitPromise: false,
     });
     await wait(1200);
   }
@@ -142,7 +159,7 @@ async function capture(client, item) {
     await client.send("Runtime.evaluate", {
       expression:
         'localStorage.setItem("anjos-admin-prototype-access", "granted"); location.reload();',
-      awaitPromise: false
+      awaitPromise: false,
     });
     await wait(1600);
   }
@@ -150,10 +167,13 @@ async function capture(client, item) {
   const screenshot = await client.send("Page.captureScreenshot", {
     format: "jpeg",
     quality: 90,
-    captureBeyondViewport: false
+    captureBeyondViewport: false,
   });
 
-  await writeFile(path.join(outDir, item.file), Buffer.from(screenshot.data, "base64"));
+  await writeFile(
+    path.join(outDir, item.file),
+    Buffer.from(screenshot.data, "base64"),
+  );
   console.log(`captured ${item.file}`);
 }
 
@@ -168,7 +188,7 @@ async function main() {
     `--remote-debugging-port=${port}`,
     `--user-data-dir=${profileDir}`,
     "--window-size=1440,1200",
-    "about:blank"
+    "about:blank",
   ]);
 
   try {

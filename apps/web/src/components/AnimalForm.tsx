@@ -6,21 +6,22 @@ import {
   AnimalSize,
   AnimalSpecies,
   AnimalStatus,
-  type AnimalSnapshot
+  type AnimalSnapshot,
 } from "@anjos/domain";
 import {
   animalSexOptions,
   animalSizeOptions,
   animalSpeciesOptions,
-  animalStatusOptions
+  animalStatusOptions,
 } from "@anjos/shared";
 import { createAnimal, updateAnimal } from "@/lib/api";
 
 type AnimalFormProps = {
   animal?: AnimalSnapshot;
+  redirectAfterSave?: string;
 };
 
-export function AnimalForm({ animal }: AnimalFormProps) {
+export function AnimalForm({ animal, redirectAfterSave }: AnimalFormProps) {
   const [message, setMessage] = useState<string | null>(null);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const isEditing = Boolean(animal);
@@ -43,7 +44,7 @@ export function AnimalForm({ animal }: AnimalFormProps) {
         description: data.get("description"),
         photoUrl: data.get("photoUrl") || null,
         status: data.get("status") ?? AnimalStatus.AVAILABLE,
-        specialNeeds: data.get("specialNeeds") === "on"
+        specialNeeds: data.get("specialNeeds") === "on",
       };
 
       if (animal) {
@@ -53,7 +54,15 @@ export function AnimalForm({ animal }: AnimalFormProps) {
         form.reset();
       }
 
-      setMessage(isEditing ? "Animal atualizado. Atualizando lista..." : "Animal cadastrado. Atualizando lista...");
+      setMessage(
+        isEditing
+          ? "Animal atualizado. Atualizando lista..."
+          : "Animal cadastrado. Atualizando lista...",
+      );
+      if (redirectAfterSave) {
+        window.location.assign(redirectAfterSave);
+        return;
+      }
       window.location.reload();
     } catch (error) {
       setMessage((error as Error).message);
@@ -78,7 +87,10 @@ export function AnimalForm({ animal }: AnimalFormProps) {
       <div className="form-row">
         <label>
           Especie
-          <select name="species" defaultValue={animal?.species ?? AnimalSpecies.DOG}>
+          <select
+            name="species"
+            defaultValue={animal?.species ?? AnimalSpecies.DOG}
+          >
             {animalSpeciesOptions.map((option) => (
               <option key={option.value} value={option.value}>
                 {option.label}
@@ -113,7 +125,10 @@ export function AnimalForm({ animal }: AnimalFormProps) {
 
         <label>
           Status
-          <select name="status" defaultValue={animal?.status ?? AnimalStatus.AVAILABLE}>
+          <select
+            name="status"
+            defaultValue={animal?.status ?? AnimalStatus.AVAILABLE}
+          >
             {animalStatusOptions.map((option) => (
               <option key={option.value} value={option.value}>
                 {option.label}
@@ -136,7 +151,11 @@ export function AnimalForm({ animal }: AnimalFormProps) {
 
       <label>
         URL da foto
-        <input name="photoUrl" defaultValue={animal?.photoUrl ?? ""} placeholder="https://..." />
+        <input
+          name="photoUrl"
+          defaultValue={animal?.photoUrl ?? ""}
+          placeholder="https://..."
+        />
       </label>
 
       <label>
@@ -151,12 +170,20 @@ export function AnimalForm({ animal }: AnimalFormProps) {
       </label>
 
       <label className="checkbox-row">
-        <input name="specialNeeds" type="checkbox" defaultChecked={animal?.specialNeeds ?? false} />
+        <input
+          name="specialNeeds"
+          type="checkbox"
+          defaultChecked={animal?.specialNeeds ?? false}
+        />
         Necessidades especiais
       </label>
 
       <button disabled={isSubmitting} type="submit">
-        {isSubmitting ? "Salvando..." : isEditing ? "Salvar alteracoes" : "Cadastrar animal"}
+        {isSubmitting
+          ? "Salvando..."
+          : isEditing
+            ? "Salvar alteracoes"
+            : "Cadastrar animal"}
       </button>
 
       {isEditing ? (
