@@ -623,6 +623,13 @@ textarea {
   resize: vertical;
 }
 
+.field-help {
+  color: var(--muted);
+  font-size: 0.78rem;
+  font-weight: 500;
+  line-height: 1.4;
+}
+
 .form-row {
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -869,6 +876,163 @@ textarea {
   object-fit: cover;
 }
 
+.support-summary-grid,
+.support-card-grid,
+.support-metrics,
+.support-management-grid {
+  display: grid;
+  gap: 1rem;
+}
+
+.support-summary-grid {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.support-card-grid {
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+}
+
+.support-highlight,
+.support-card,
+.support-metric,
+.support-admin-item,
+.support-history-item {
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: white;
+  padding: 1rem;
+}
+
+.support-highlight {
+  background: #e7f6f0;
+}
+
+.support-highlight h2,
+.support-card h3 {
+  margin: 0 0 0.6rem;
+}
+
+.support-highlight button,
+.support-card button {
+  border: 0;
+  border-radius: 8px;
+  background: var(--primary);
+  color: white;
+  padding: 0.68rem 0.85rem;
+  font-weight: 800;
+}
+
+.pix-card code {
+  display: block;
+  overflow-wrap: anywhere;
+  border-radius: 8px;
+  background: white;
+  padding: 0.75rem;
+  font-weight: 800;
+}
+
+.support-card__meta {
+  color: var(--primary) !important;
+  font-size: 0.78rem;
+  font-weight: 800;
+  text-transform: uppercase;
+}
+
+.support-progress {
+  margin: 1rem 0;
+}
+
+.support-progress__bar {
+  overflow: hidden;
+  height: 0.55rem;
+  border-radius: 999px;
+  background: #d8e9e3;
+}
+
+.support-progress__bar span {
+  display: block;
+  height: 100%;
+  border-radius: inherit;
+  background: var(--primary);
+}
+
+.support-progress p {
+  margin: 0.45rem 0 0;
+  font-size: 0.82rem;
+}
+
+.support-form-panel {
+  display: grid;
+  grid-template-columns: minmax(230px, 0.75fr) minmax(0, 1.25fr);
+  gap: 1.5rem;
+}
+
+.support-admin {
+  display: grid;
+  gap: 1rem;
+}
+
+.support-metrics {
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+}
+
+.support-metric strong,
+.support-metric span {
+  display: block;
+}
+
+.support-metric strong {
+  color: var(--primary-dark);
+  font-size: 2rem;
+}
+
+.support-metric span {
+  color: var(--muted);
+  font-size: 0.85rem;
+  font-weight: 700;
+}
+
+.support-management-grid,
+.support-history {
+  display: grid;
+  gap: 0.65rem;
+}
+
+.support-admin-item {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(120px, auto) minmax(150px, 210px);
+  gap: 0.75rem;
+  align-items: center;
+}
+
+.support-admin-item span {
+  color: var(--muted);
+  font-size: 0.86rem;
+}
+
+.support-admin-item select,
+.support-history-item select {
+  width: 100%;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: white;
+  padding: 0.65rem;
+}
+
+.support-history-item {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr)) minmax(150px, 210px);
+  gap: 0.75rem;
+  align-items: center;
+}
+
+.support-history-item p {
+  margin: 0.25rem 0 0;
+  color: var(--muted);
+  font-size: 0.82rem;
+  line-height: 1.4;
+}
+
 @media (max-width: 700px) {
   .site-header,
   .section-header {
@@ -904,6 +1068,17 @@ textarea {
   .content-grid,
   .contact-layout {
     grid-template-columns: 1fr;
+  }
+
+  .support-summary-grid,
+  .support-form-panel,
+  .support-history-item,
+  .support-admin-item {
+    grid-template-columns: 1fr;
+  }
+
+  .support-metrics {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 
   .site-nav {

@@ -1,4 +1,5 @@
 import { siteContent } from "@anjos/shared";
+import { ContactForm } from "@/components/ContactForm";
 
 export default function ContactPage() {
   const { contact } = siteContent;
@@ -25,19 +26,7 @@ export default function ContactPage() {
 
         <div className="panel">
           <h2>{contact.formTitle}</h2>
-          <form className="form">
-            <label>
-              {contact.form.nameLabel}
-              <input disabled placeholder={contact.form.namePlaceholder} />
-            </label>
-            <label>
-              {contact.form.messageLabel}
-              <textarea disabled placeholder={contact.form.messagePlaceholder} />
-            </label>
-            <button disabled type="button">
-              {contact.form.buttonLabel}
-            </button>
-          </form>
+          <ContactForm />
         </div>
       </section>
     </main>

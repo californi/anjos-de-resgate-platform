@@ -2,13 +2,14 @@
 
 Este guia descreve como executar o prototipo atual da Plataforma Anjos de
 Resgate com Docker Compose. Ele cobre o portal publico, administracao inicial
-de animais e o registro inicial de interesse em adocao.
+de animais, interesse em adocao, upload, contato e doacoes/apoios.
 
 ## O que sera executado
 
 - `postgres`: banco PostgreSQL do prototipo.
 - `api`: API NestJS com modulos de animais e interesses iniciais de adocao.
 - `web`: frontend Next.js/PWA.
+- `mailpit`: servidor SMTP e caixa de e-mail apenas para demonstracao local.
 
 ## Pre-requisitos
 
@@ -17,6 +18,7 @@ de animais e o registro inicial de interesse em adocao.
   - `3000` para a Web.
   - `3333` para a API.
   - `5432` para o PostgreSQL.
+  - `8025` para visualizar e-mails locais.
 
 ## Subir o ambiente
 
@@ -44,6 +46,9 @@ docker compose -p anjos-de-resgate up --build
 - Admin: `http://localhost:3000/admin/animais`
 - Cadastro: `http://localhost:3000/admin/animais/cadastro`
 - Solicitacoes: `http://localhost:3000/admin/animais/interesses`
+- Apoios: `http://localhost:3000/apoie`
+- Administracao de apoios: `http://localhost:3000/admin/apoios`
+- E-mails enviados: `http://localhost:8025`
 
 Codigo administrativo simulado:
 
@@ -62,7 +67,8 @@ pnpm --filter @anjos/api db:push
 pnpm --filter @anjos/api db:seed
 ```
 
-Isso cria a estrutura do banco e insere animais de demonstracao.
+Isso cria a estrutura do banco e insere animais, campanhas, necessidades e um
+apoio ficticio de demonstracao.
 
 Se voce executou uma versao anterior do prototipo com o nome tecnico antigo,
 recrie o ambiente local para evitar conflito entre bancos e containers:
@@ -92,6 +98,10 @@ para apagar o banco local e recriar tudo do zero.
 12. Abra `http://localhost:3000/admin/animais/cadastro` e cadastre um animal.
 13. Edite um animal pela acao `Editar` no inventario.
 14. Altere o status no seletor administrativo.
+15. Selecione uma foto do dispositivo no cadastro de animal.
+16. Envie uma mensagem em `http://localhost:3000/contato` e confira no Mailpit.
+17. Registre um apoio em `http://localhost:3000/apoie`.
+18. Abra `http://localhost:3000/admin/apoios` e confirme o apoio.
 
 Regra importante: o interesse publico so fica bloqueado quando o animal esta em
 `IN_ADOPTION_PROCESS`. Animais em tratamento podem receber manifestacao de
@@ -110,9 +120,22 @@ sh scripts/docker-prototype.sh reset
 - `up`: constroi imagens, sobe containers, aplica schema, roda seed e aguarda
   Web/API.
 - `status`: mostra o estado dos servicos.
-- `logs`: mostra os logs recentes da API e da Web.
+- `logs`: mostra os logs recentes da API, Web e Mailpit.
 - `down`: para os containers sem apagar o banco local.
-- `reset`: apaga o volume local do PostgreSQL e recria o ambiente do zero.
+- `reset`: apaga os volumes locais do PostgreSQL e das imagens e recria o
+  ambiente do zero.
+
+## Configuracao de e-mail, Pix e imagens
+
+No Docker, as mensagens sao capturadas pelo Mailpit e nao saem do computador.
+Para SMTP real, configure `SMTP_HOST`, `SMTP_PORT`, `SMTP_USER`,
+`SMTP_PASSWORD`, `SMTP_FROM` e `CONTACT_TO` fora do repositorio.
+
+Substitua `PIX_KEY` e `PIX_RECIPIENT` apenas depois da autorizacao da ONG. O
+prototipo exibe esses dados, mas nao processa nem confirma pagamentos.
+
+As imagens enviadas ficam no volume `uploads_data` e sobrevivem ao comando
+`down`. O comando `reset` remove esse volume.
 
 ## Encerrar
 

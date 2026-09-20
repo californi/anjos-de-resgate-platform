@@ -18,3 +18,4 @@ github-ready/
 docs/assets/prototipo-1/0*.png
 apps/api/prisma/dev.db
 apps/api/prisma/dev.db-journal
+apps/api/uploads/

@@ -5,9 +5,8 @@ cronograma incremental da Plataforma Anjos de Resgate.
 
 ## Objetivo da validacao
 
-Validar se o portal comunica bem a proposta da plataforma, se o feed suporta
-muitos animais e se a gestao inicial de animais/interesses atende ao fluxo
-minimo da ONG antes de avancar para a adocao completa.
+Validar se o portal, o feed, os interesses de adocao, o contato e as formas de
+apoio atendem ao fluxo incremental da ONG.
 
 ## Acessos rapidos
 
@@ -27,6 +26,9 @@ sh scripts/docker-prototype.sh up
 | Admin             | http://localhost:3000/admin/animais            | Ver inventario, interesses e status        |
 | Cadastro          | http://localhost:3000/admin/animais/cadastro   | Cadastrar novo animal                      |
 | Solicitacoes      | http://localhost:3000/admin/animais/interesses | Revisar interesses por animal              |
+| Apoie             | http://localhost:3000/apoie                    | Registrar doacao ou apoio                  |
+| Admin de apoios   | http://localhost:3000/admin/apoios             | Gerir campanhas, necessidades e historico  |
+| E-mails locais    | http://localhost:8025                           | Conferir mensagens enviadas                |
 
 Codigo administrativo simulado:
 
@@ -49,8 +51,10 @@ Resumo:
 - Implementado no Prototipo 2.1: feed compacto para dezenas de animais,
   registro publico de interesse em adocao, telas administrativas separadas e
   quantidade de interesses por animal no inventario e nas solicitacoes.
-- Proximos passos no cronograma: experiencia estilo Tinder, cadastro de
-  adotante, triagem e fluxo completo de adocao.
+- Implementado no Prototipo 3: upload de foto, contato por e-mail, doacao geral,
+  campanhas, apadrinhamento, necessidades por animal, doadores e historico.
+- Proximos passos: validar privacidade, autenticacao, textos e Pix reais antes
+  de decidir qualquer integracao financeira.
 
 ## Arquitetura e infraestrutura
 
@@ -173,6 +177,9 @@ O que validar:
 | Dados       | Prisma/PostgreSQL, SQLite opcional e seed com dezenas de animais     | `apps/api/prisma`, `packages/shared/src/demo-animals.ts`                                                                                   |
 | Docker      | Web, API e Postgres em Compose                                       | `docker-compose.yml`, `apps/*/Dockerfile`                                                                                                  |
 | Evidencias  | Registro ArcAssist-Web do incremento                                 | `docs/15-prototipo-1-arcassist-web`                                                                                                        |
+| Apoios      | Campanhas, necessidades, doadores e historico                        | `packages/domain/src/support.ts`, `apps/api/src/support`, `apps/web/src/app/apoie`, `apps/web/src/app/admin/apoios`                         |
+| Upload      | Selecao e persistencia de imagem                                     | `apps/api/src/uploads`, `apps/web/src/components/AnimalForm.tsx`                                                                            |
+| Contato     | Envio SMTP e caixa local                                             | `apps/api/src/contact`, `apps/web/src/components/ContactForm.tsx`, `mailpit`                                                                 |
 
 ## O que ainda falta
 
@@ -190,8 +197,9 @@ Ainda nao foi implementado:
 - cadastro completo de adotantes;
 - triagem de adotantes;
 - painel administrativo para editar textos e imagens do portal;
-- doacoes e apadrinhamento;
-- campanhas e parcerias;
+- processamento automatico de pagamento;
+- autenticacao, permissoes e privacidade formal para doadores;
+- parcerias;
 - dashboard e relatorios.
 
 ## Roteiro sugerido para a reuniao

@@ -61,6 +61,9 @@ export default async function AnimalDetailPage({
             <a className="button-link" href="#interesse">
               Tenho interesse
             </a>
+            <a className="button-link secondary" href={`/apoie?animalId=${animal.id}`}>
+              Apadrinhar ou apoiar
+            </a>
             <a className="button-link secondary" href="/animais">
               Voltar
             </a>

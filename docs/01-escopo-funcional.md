@@ -63,7 +63,7 @@ nem o processo completo de adocao:
 - Status inicial de interesse como `RECEIVED`, preservando revisao humana pela
   equipe.
 
-## Fora do escopo nesta iteracao
+## Fora do escopo apos o Prototipo 3
 
 - Autenticacao real.
 - Processo completo de adocao.
@@ -72,9 +72,26 @@ nem o processo completo de adocao:
 - Mudanca automatica de status do animal apos interesse.
 - Upload e gestao real de videos.
 - Paginacao, busca e filtros avancados.
-- Pagamentos ou doacoes.
-- Apadrinhamento.
-- Campanhas e parcerias.
+- Processamento automatico de pagamentos ou conciliacao bancaria.
+- Gateway de pagamento, cartao ou armazenamento de credenciais financeiras.
+- Autenticacao e autorizacao reais para dados de doadores.
+- Parcerias.
 - Relatorios gerenciais.
 - Permissoes por perfil.
 - Painel administrativo para editar conteudo do portal.
+
+## Escopo do Prototipo 3 - doacoes e apoios
+
+- Upload de foto a partir do dispositivo, com JPG, PNG e WebP de ate 5 MB.
+- Formulario de contato com envio por SMTP e captura local no Mailpit.
+- Pagina publica de apoio com informacoes de Pix.
+- Doacao geral.
+- Campanhas de arrecadacao com meta e progresso confirmado.
+- Apadrinhamento unico ou mensal de animal.
+- Necessidades financeiras por animal e categoria.
+- Registro de doadores por e-mail.
+- Historico administrativo de apoio.
+- Confirmacao ou cancelamento manual do apoio pela equipe.
+
+O registro de apoio nao processa pagamento. Ele documenta a intencao e somente
+entra no progresso publico depois da confirmacao administrativa.

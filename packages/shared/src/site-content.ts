@@ -4,20 +4,21 @@ export const siteContent = {
     platformName: "Plataforma Anjos de Resgate",
     shortName: "Anjos Resgate",
     location: "Sao Sebastiao do Paraiso/MG",
-    description: "Prototipo inicial para apoio a ONG Anjos de Resgate.",
+    description: "Plataforma em validacao incremental com a ONG Anjos de Resgate.",
   },
   navigation: [
     { label: "Sobre", href: "/sobre" },
     { label: "Animais", href: "/animais" },
+    { label: "Apoie", href: "/apoie" },
     { label: "Contato", href: "/contato" },
     { label: "Admin", href: "/admin/animais" },
   ],
   home: {
     hero: {
-      eyebrow: "Prototipo funcional - validacao em 17/06/2026",
+      eyebrow: "Prototipo 3 - validacao funcional",
       title: "Plataforma Anjos de Resgate",
       description:
-        "Uma base Web/PWA para divulgar animais, apoiar a rotina da ONG e preparar os proximos modulos de adocao, doacoes, apadrinhamento e parcerias.",
+        "Uma plataforma Web/PWA para divulgar animais, receber interesses de adocao e organizar doacoes, campanhas e apadrinhamentos.",
       imageUrl:
         "https://images.unsplash.com/photo-1601758124510-52d02ddb7cbd?auto=format&fit=crop&w=1800&q=85",
       primaryAction: { label: "Ver animais disponiveis", href: "/animais" },
@@ -27,10 +28,10 @@ export const siteContent = {
       },
     },
     prototypeSection: {
-      eyebrow: "Primeira iteracao",
+      eyebrow: "Prototipo 3",
       title: "O que o prototipo ja demonstra",
       description:
-        "O foco desta versao e validar a divulgacao de muitos animais, o interesse inicial de adocao e a gestao administrativa separada.",
+        "Esta versao integra divulgacao, interesse inicial de adocao, contato por e-mail e diferentes formas de apoio financeiro.",
       features: [
         {
           title: "Adocao",
@@ -38,20 +39,20 @@ export const siteContent = {
             "Feed publico com muitos animais e registro inicial de interesse para revisao posterior da equipe.",
         },
         {
-          title: "Doacoes futuras",
+          title: "Doacoes e campanhas",
           description:
-            "Area destacada no portal para comunicar que doacoes gerais serao integradas em uma iteracao posterior.",
+            "Doacoes gerais e campanhas com metas, registro de doadores e confirmacao administrativa.",
         },
         {
-          title: "Apadrinhamento futuro",
+          title: "Apadrinhamento",
           description:
-            "O dominio ja reserva espaco para campanhas de apoio recorrente a animais em tratamento ou longa permanencia.",
+            "Apoio unico ou mensal direcionado a um animal ou a uma necessidade especifica.",
         },
       ],
     },
     featuredAnimals: {
       eyebrow: "Animais em destaque",
-      title: "Primeiros perfis para validacao",
+      title: "Perfis para validacao",
       action: { label: "Abrir listagem completa", href: "/animais" },
     },
   },
@@ -68,22 +69,22 @@ export const siteContent = {
       eyebrow: "Validacao atual",
       title: "Prototipo atual",
       description:
-        "A reuniao valida o feed publico de animais, o cadastro administrativo separado, as solicitacoes de interesse e a alteracao de status antes dos fluxos completos de adocao e doacao.",
+        "A reuniao valida o feed de animais, as solicitacoes de interesse, o contato por e-mail e o registro de doacoes, campanhas, apadrinhamentos e necessidades por animal.",
       metrics: [
         { value: "30", label: "animais demo" },
-        { value: "4", label: "telas admin" },
+        { value: "5", label: "telas admin" },
       ],
     },
     cards: [
       {
         title: "Finalidade do prototipo",
         description:
-          "Nesta fase, o objetivo e validar se a ONG consegue manter um feed de animais, receber interesses iniciais e revisar solicitacoes no admin.",
+          "Nesta fase, o objetivo e validar se a ONG consegue divulgar animais, revisar interesses e organizar apoios gerais ou direcionados.",
       },
       {
         title: "Evolucao prevista",
         description:
-          "As proximas iteracoes devem incluir triagem de adotantes, fluxo completo de adocao, doacoes, apadrinhamento, campanhas, parcerias, experiencia mobile/PWA e indicadores administrativos.",
+          "As proximas iteracoes devem incluir triagem de adotantes, fluxo completo de adocao, integracao de pagamentos, parcerias, gestao de conteudo e indicadores administrativos.",
       },
       {
         title: "Como avaliamos",
@@ -96,7 +97,7 @@ export const siteContent = {
     eyebrow: "Contato",
     title: "Fale com a ONG",
     description:
-      "Esta pagina organiza os canais de contato usados na validacao do portal. O envio automatico de mensagens ainda nao faz parte deste prototipo.",
+      "Envie uma mensagem para a equipe da ONG ou utilize os canais de atendimento.",
     channelsTitle: "Canais de atendimento",
     channels: [
       { label: "WhatsApp", value: "informar durante a validacao" },
@@ -106,10 +107,18 @@ export const siteContent = {
     formTitle: "Mensagem de interesse",
     form: {
       nameLabel: "Nome",
-      namePlaceholder: "Formulario sera ativado em iteracao futura",
+      namePlaceholder: "Seu nome",
+      emailLabel: "E-mail",
+      emailPlaceholder: "voce@example.org",
       messageLabel: "Mensagem",
-      messagePlaceholder: "Por enquanto, use os canais informados.",
-      buttonLabel: "Envio futuro",
+      messagePlaceholder: "Como podemos ajudar?",
+      buttonLabel: "Enviar mensagem",
+    },
+  },
+  support: {
+    pix: {
+      key: "PIX-DEMONSTRACAO",
+      recipient: "Anjos de Resgate - ambiente de demonstracao",
     },
   },
   admin: {

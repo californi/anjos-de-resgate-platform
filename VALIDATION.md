@@ -5,7 +5,7 @@ ou sugerir melhorias pela interface do GitHub.
 
 ## O que validar nesta versao
 
-O foco atual e o Prototipo 1 da Plataforma Anjos de Resgate:
+O foco atual e o Prototipo 3 da Plataforma Anjos de Resgate:
 
 - portal inicial;
 - pagina sobre a ONG;
@@ -14,10 +14,15 @@ O foco atual e o Prototipo 1 da Plataforma Anjos de Resgate:
 - detalhe de animal;
 - acesso administrativo simulado;
 - cadastro, edicao e alteracao de status de animais;
+- upload de foto a partir do dispositivo;
+- envio de contato por e-mail local;
+- doacao geral, campanhas, apadrinhamento e necessidades por animal;
+- doadores, historico e confirmacao administrativa de apoio;
 - execucao local com Docker Compose.
 
 Funcionalidades ainda fora do escopo: autenticacao real, fluxo completo de
-adocao, doacoes, apadrinhamento, campanhas, parcerias, dashboard e relatorios.
+adocao, processamento automatico de pagamento, parcerias, dashboard gerencial
+consolidado e relatorios.
 
 ## Como executar
 
@@ -33,6 +38,9 @@ Acesse:
 - Admin: http://localhost:3000/admin/animais
 - API: http://localhost:3333
 - Health check: http://localhost:3333/health
+- Apoios: http://localhost:3000/apoie
+- Admin de apoios: http://localhost:3000/admin/apoios
+- E-mails locais: http://localhost:8025
 
 Codigo administrativo simulado:
 
@@ -50,6 +58,9 @@ anjos2026
 6. Cadastrar ou editar um animal de exemplo.
 7. Alterar o status de um animal.
 8. Registrar sugestoes ou problemas usando uma Issue do GitHub.
+9. Enviar uma mensagem pela pagina `Contato` e conferir no Mailpit.
+10. Registrar cada tipo de apoio na pagina `Apoie` com dados ficticios.
+11. Confirmar o apoio no admin e verificar o progresso da campanha.
 
 Prints de referencia: `docs/18-prints-telas-prototipo-1.md`.
 
@@ -84,8 +95,8 @@ Abra um Pull Request quando a mudanca for concreta e pequena, por exemplo:
 - teste automatizado;
 - refatoracao simples sem alterar o escopo.
 
-Antes de propor modulos grandes, como adocao completa ou doacoes, abra uma
-Issue para alinhamento de escopo.
+Antes de propor modulos grandes, como adocao completa ou pagamento integrado,
+abra uma Issue para alinhamento de escopo.
 
 ## Cuidados de privacidade
 

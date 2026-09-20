@@ -117,3 +117,36 @@
 - Sem fluxo Tinder/swipe.
 - Sem mudanca automatica de status do animal.
 - Sem video real, upload de midia, paginacao ou filtros avancados.
+
+## Prototipo 3 - doacoes e apoios
+
+### Telas
+
+- Contato com envio de e-mail.
+- Cadastro/edicao de animal com selecao de foto do dispositivo.
+- Pagina publica `/apoie`.
+- Painel administrativo `/admin/apoios`.
+
+### Funcionalidades
+
+- Doacao geral, campanha, apadrinhamento e necessidade por animal.
+- Registro de doador e historico de apoio.
+- Apoio unico ou mensal.
+- Informacoes de Pix configuraveis.
+- Confirmacao manual do recebimento.
+- Metas calculadas com valores confirmados.
+
+### O que sera validado
+
+- Se os quatro destinos de apoio sao compreensiveis.
+- Se as campanhas e necessidades possuem dados suficientes.
+- Se o historico ajuda a ONG a conferir o Pix.
+- Quais dados pessoais e prazos de retencao devem ser adotados.
+- Se o fluxo manual deve preceder uma futura integracao de pagamento.
+
+### Limitacoes conhecidas
+
+- Acesso administrativo ainda simulado.
+- Pix de demonstracao, sem conciliacao bancaria.
+- Sem gateway, cartao, recibo fiscal ou notificacao automatica.
+- Dados de doadores devem permanecer ficticios ate a adequacao de privacidade.

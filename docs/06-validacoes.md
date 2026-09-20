@@ -107,3 +107,27 @@ Use este arquivo como registro continuo das validacoes com a ONG.
 - Registro de execucao do Docker.
 - Observacoes da equipe sobre campos, textos e fluxo administrativo.
 - Issues ou Pull Requests abertos a partir da validacao.
+
+## Feedback preparatorio do Prototipo 3
+
+### Origem
+
+- Brainstorming da reuniao anterior, conforme registro do projeto.
+
+### Feedback recebido
+
+- Permitir selecionar foto a partir do armazenamento do dispositivo.
+- Ativar formulario de contato com e-mail de retorno e encaminhamento para a
+  ONG.
+- Implementar doacoes gerais, campanhas, apadrinhamento, necessidades por
+  animal, doadores, historico e informacoes de Pix.
+
+### Decisoes tomadas
+
+- ADR-009: upload local de imagens para o prototipo.
+- ADR-010: contato por SMTP e Mailpit na demonstracao.
+- ADR-011: registro de apoio com confirmacao humana e sem gateway.
+
+### Evidencias
+
+- `docs/22-prototipo-3-apoios/`.

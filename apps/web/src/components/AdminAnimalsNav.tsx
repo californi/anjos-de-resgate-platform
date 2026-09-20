@@ -1,5 +1,5 @@
 type AdminAnimalsNavProps = {
-  active: "inventory" | "create" | "interests";
+  active: "inventory" | "create" | "interests" | "support";
 };
 
 const links = [
@@ -17,6 +17,11 @@ const links = [
     key: "interests",
     href: "/admin/animais/interesses",
     label: "Solicitacoes",
+  },
+  {
+    key: "support",
+    href: "/admin/apoios",
+    label: "Doacoes e apoios",
   },
 ] as const;
 

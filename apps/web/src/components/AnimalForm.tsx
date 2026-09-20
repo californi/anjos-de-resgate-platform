@@ -14,7 +14,7 @@ import {
   animalSpeciesOptions,
   animalStatusOptions,
 } from "@anjos/shared";
-import { createAnimal, updateAnimal } from "@/lib/api";
+import { createAnimal, updateAnimal, uploadAnimalImage } from "@/lib/api";
 
 type AnimalFormProps = {
   animal?: AnimalSnapshot;
@@ -24,6 +24,7 @@ type AnimalFormProps = {
 export function AnimalForm({ animal, redirectAfterSave }: AnimalFormProps) {
   const [message, setMessage] = useState<string | null>(null);
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [selectedImage, setSelectedImage] = useState<File | null>(null);
   const isEditing = Boolean(animal);
 
   async function handleSubmit(event: FormEvent<HTMLFormElement>) {
@@ -35,6 +36,9 @@ export function AnimalForm({ animal, redirectAfterSave }: AnimalFormProps) {
     const data = new FormData(form);
 
     try {
+      const photoUrl = selectedImage
+        ? await uploadAnimalImage(selectedImage)
+        : data.get("photoUrl") || null;
       const payload = {
         name: data.get("name"),
         species: data.get("species") ?? AnimalSpecies.DOG,
@@ -42,7 +46,7 @@ export function AnimalForm({ animal, redirectAfterSave }: AnimalFormProps) {
         size: data.get("size") ?? AnimalSize.UNKNOWN,
         approximateAge: data.get("approximateAge"),
         description: data.get("description"),
-        photoUrl: data.get("photoUrl") || null,
+        photoUrl,
         status: data.get("status") ?? AnimalStatus.AVAILABLE,
         specialNeeds: data.get("specialNeeds") === "on",
       };
@@ -150,12 +154,30 @@ export function AnimalForm({ animal, redirectAfterSave }: AnimalFormProps) {
       </label>
 
       <label>
-        URL da foto
+        Foto do animal
+        <input
+          accept="image/jpeg,image/png,image/webp"
+          name="photoFile"
+          onChange={(event) =>
+            setSelectedImage(event.target.files?.[0] ?? null)
+          }
+          type="file"
+        />
+        <span className="field-help">
+          Selecione uma imagem JPG, PNG ou WebP de ate 5 MB.
+        </span>
+      </label>
+
+      <label>
+        URL alternativa da foto
         <input
           name="photoUrl"
           defaultValue={animal?.photoUrl ?? ""}
           placeholder="https://..."
         />
+        <span className="field-help">
+          A imagem selecionada acima tem prioridade sobre esta URL.
+        </span>
       </label>
 
       <label>

@@ -1,0 +1,45 @@
+{
+  "increment": "prototype-3-support",
+  "recordedAt": "2026-09-18",
+  "baselineCommit": "b792d11",
+  "plannedMilestone": "2026-08",
+  "inputs": [
+    "docs/01-escopo-funcional.md",
+    "docs/03-backlog-incremental.md",
+    "docs/05-prototipos.md",
+    "docs/07-decisoes-arquiteturais/",
+    "packages/domain/src/animal.ts",
+    "packages/domain/src/adoption-interest.ts"
+  ],
+  "decisions": [
+    "ADR-009-upload-local-de-imagens",
+    "ADR-010-contato-smtp-com-mailpit",
+    "ADR-011-apoio-financeiro-com-confirmacao-humana"
+  ],
+  "outputs": [
+    "packages/domain/src/support.ts",
+    "apps/api/src/support/",
+    "apps/api/src/contact/",
+    "apps/api/src/uploads/",
+    "apps/web/src/app/apoie/",
+    "apps/web/src/app/admin/apoios/",
+    "diagrams/fluxo-apoio-financeiro.mmd",
+    "prompts/inclusao-prototipo-3-apoios.md"
+  ],
+  "validation": {
+    "buildPackages": "passed",
+    "buildApi": "passed",
+    "buildWeb": "passed",
+    "automatedTests": "passed",
+    "dockerComposeConfig": "passed",
+    "dockerRuntime": "passed"
+  },
+  "knownLimits": [
+    "simulated-admin-access",
+    "no-payment-processing",
+    "no-bank-reconciliation",
+    "no-production-privacy-controls",
+    "local-image-storage",
+    "smtp-configuration-required-outside-docker"
+  ]
+}

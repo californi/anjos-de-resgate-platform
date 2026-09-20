@@ -21,9 +21,76 @@ model Animal {
   createdAt      DateTime           @default(now())
   updatedAt      DateTime           @updatedAt
   interests      AdoptionInterest[]
+  needs          AnimalNeed[]
+  supports       SupportRecord[]
 
   @@index([status])
   @@index([species])
+}
+
+model Campaign {
+  id              String          @id @default(uuid())
+  title           String
+  description     String
+  goalAmountCents Int
+  status          String          @default("ACTIVE")
+  createdAt       DateTime        @default(now())
+  updatedAt       DateTime        @updatedAt
+  supports        SupportRecord[]
+
+  @@index([status])
+}
+
+model AnimalNeed {
+  id                String          @id @default(uuid())
+  animalId          String
+  title             String
+  description       String
+  category          String
+  targetAmountCents Int?
+  status            String          @default("OPEN")
+  createdAt         DateTime        @default(now())
+  updatedAt         DateTime        @updatedAt
+  animal            Animal          @relation(fields: [animalId], references: [id], onDelete: Cascade)
+  supports          SupportRecord[]
+
+  @@index([animalId])
+  @@index([status])
+}
+
+model Donor {
+  id        String          @id @default(uuid())
+  name      String
+  email     String          @unique
+  createdAt DateTime        @default(now())
+  updatedAt DateTime        @updatedAt
+  supports  SupportRecord[]
+
+  @@index([createdAt])
+}
+
+model SupportRecord {
+  id           String      @id @default(uuid())
+  donorId      String
+  destination  String
+  amountCents  Int
+  frequency    String      @default("ONE_TIME")
+  animalId     String?
+  campaignId   String?
+  animalNeedId String?
+  message      String?
+  status       String      @default("PLEDGED")
+  createdAt    DateTime    @default(now())
+  updatedAt    DateTime    @updatedAt
+  donor        Donor       @relation(fields: [donorId], references: [id], onDelete: Restrict)
+  animal       Animal?     @relation(fields: [animalId], references: [id], onDelete: SetNull)
+  campaign     Campaign?   @relation(fields: [campaignId], references: [id], onDelete: SetNull)
+  animalNeed   AnimalNeed? @relation(fields: [animalNeedId], references: [id], onDelete: SetNull)
+
+  @@index([donorId])
+  @@index([destination])
+  @@index([status])
+  @@index([createdAt])
 }
 
 model AdoptionInterest {

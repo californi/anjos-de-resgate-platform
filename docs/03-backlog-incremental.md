@@ -47,14 +47,26 @@
 
 ## Prototipo 3 - Doacoes e apadrinhamento
 
-- Pagina de doacoes.
-- Cadastro de apadrinhamento.
-- Vinculo entre padrinho e animal.
-- Evidencias e agradecimentos.
+- Upload flexivel de foto no cadastro de animal. Implementado.
+- Contato por e-mail via SMTP. Implementado.
+- Pagina publica de apoio e Pix informativo. Implementado.
+- Doacao geral. Implementado.
+- Campanhas de arrecadacao. Implementado.
+- Apadrinhamento unico ou mensal. Implementado.
+- Necessidades por animal. Implementado.
+- Registro de doadores e historico de apoio. Implementado.
+- Confirmacao administrativa do recebimento. Implementado.
+- Evidencias e ADRs do incremento. Implementado.
 
-## Prototipo 4 - Campanhas e parcerias
+### Itens remanescentes do Prototipo 3
 
-- Cadastro de campanhas.
+- Validar chave Pix, titular e textos reais com a ONG.
+- Definir consentimento, politica de privacidade e retencao de dados.
+- Substituir acesso simulado por autenticacao e permissoes reais.
+- Avaliar integracao financeira somente depois da validacao do fluxo manual.
+
+## Prototipo 4 - Parcerias
+
 - Vitrine de parceiros.
 - Veterinarios e pet shops parceiros.
 

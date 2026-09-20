@@ -48,9 +48,6 @@ Campos iniciais:
 ## Entidades futuras
 
 - `Adoptant`
-- `Donation`
-- `Sponsorship`
-- `Campaign`
 - `Partner`
 - `User`
 - `Role`
@@ -82,3 +79,23 @@ Regras atuais:
   `IN_ADOPTION_PROCESS`.
 - O interesse inicia como `RECEIVED`.
 - O interesse nao altera automaticamente o status do animal.
+
+## Apoios financeiros
+
+`Campaign` representa uma arrecadacao com titulo, descricao, meta e status.
+
+`AnimalNeed` representa uma necessidade vinculada a um animal, com categoria,
+meta opcional e status.
+
+`Donor` registra nome e e-mail da pessoa apoiadora. O e-mail e unico e permite
+reutilizar o cadastro em novos apoios.
+
+`SupportRecord` registra valor em centavos, frequencia, status e um dos destinos:
+
+- `GENERAL`: uso geral pela ONG;
+- `CAMPAIGN`: exige campanha ativa;
+- `SPONSORSHIP`: exige animal;
+- `ANIMAL_NEED`: exige necessidade aberta e deriva o animal vinculado.
+
+Todo apoio inicia como `PLEDGED`. Apenas `CONFIRMED` compoe o progresso de
+campanhas e necessidades. `CANCELLED` preserva o historico sem somar valores.

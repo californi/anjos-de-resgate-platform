@@ -1,0 +1,25 @@
+flowchart LR
+  visitor[Pessoa apoiadora] --> choose{Escolhe o destino}
+  choose --> general[Doacao geral]
+  choose --> campaign[Campanha]
+  choose --> sponsorship[Apadrinhamento]
+  choose --> need[Necessidade do animal]
+
+  general --> form[Informa nome, e-mail, valor e frequencia]
+  campaign --> form
+  sponsorship --> form
+  need --> form
+
+  form --> pledged[SupportRecord: PLEDGED]
+  pledged --> pix[Exibe informacoes de Pix]
+  pledged --> admin[Revisao administrativa]
+  admin -->|Recebimento conferido| confirmed[CONFIRMED]
+  admin -->|Nao realizado ou invalidado| cancelled[CANCELLED]
+  confirmed --> history[Historico de apoio]
+  confirmed --> progress[Atualiza progresso confirmado]
+
+  classDef public fill:#e7f6f0,stroke:#218767,color:#16322c;
+  classDef admin fill:#fff8e6,stroke:#c69a20,color:#16322c;
+  class visitor,choose,general,campaign,sponsorship,need,form,pix public;
+  class admin,confirmed,cancelled,history,progress admin;
+

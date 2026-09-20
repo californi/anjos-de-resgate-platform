@@ -8,7 +8,7 @@ COMPOSE="docker compose -p ${PROJECT_NAME}"
 print_usage() {
   cat <<'USAGE'
 Uso:
-  sh scripts/docker-prototype.sh up       Sobe Web, API e PostgreSQL
+  sh scripts/docker-prototype.sh up       Sobe Web, API, PostgreSQL e e-mail local
   sh scripts/docker-prototype.sh down     Para os containers sem apagar dados
   sh scripts/docker-prototype.sh reset    Recria containers e apaga o banco local
   sh scripts/docker-prototype.sh status   Mostra estado dos servicos
@@ -18,6 +18,8 @@ Depois de subir:
   Web:   http://localhost:3000
   API:   http://localhost:3333/health
   Admin: http://localhost:3000/admin/animais
+  Apoios: http://localhost:3000/apoie
+  E-mails enviados: http://localhost:8025
   Codigo administrativo simulado: anjos2026
 USAGE
 }
@@ -52,6 +54,7 @@ case "$command" in
     wait_for_url "Web" "http://localhost:3000"
     printf "\nAmbiente pronto para validacao.\n"
     printf "Abra http://localhost:3000 e use o admin em http://localhost:3000/admin/animais.\n"
+    printf "Apoios: http://localhost:3000/apoie | E-mails: http://localhost:8025\n"
     ;;
   down)
     $COMPOSE down --remove-orphans
@@ -68,7 +71,7 @@ case "$command" in
     $COMPOSE ps
     ;;
   logs)
-    $COMPOSE logs --tail=120 api web
+    $COMPOSE logs --tail=120 api web mailpit
     ;;
   help|-h|--help)
     print_usage

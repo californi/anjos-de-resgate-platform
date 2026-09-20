@@ -2,11 +2,17 @@
 
 Prototipo Web/PWA para apoio a ONG Anjos de Resgate, de Sao Sebastiao do Paraiso/MG.
 
-A primeira entrega foi preparada para demonstracao em 17/06/2026 e cobre apenas o portal inicial, a listagem publica de animais, cards reutilizaveis, cadastro administrativo basico e API inicial de animais. Os modulos de adocao completa, doacoes, apadrinhamento, campanhas, parcerias, dashboard, usuarios e relatorios estao documentados como evolucao futura.
+A primeira entrega foi preparada para demonstracao em 17/06/2026 com portal,
+animais e administracao inicial. A base evoluiu incrementalmente para interesse
+em adocao e, no Prototipo 3, para doacoes e apoios.
 
 O incremento do Prototipo 1, previsto para validacao em 01/07/2026, adiciona paginas institucionais, contato, login administrativo simulado, edicao de animais no frontend e execucao orientada por Docker.
 
 O incremento do Prototipo 2.1 adiciona o registro inicial de interesse em adocao a partir da pagina de detalhe do animal. O interesse fica vinculado ao animal e aparece para revisao administrativa, mas ainda nao implementa o processo completo de adocao.
+
+O Prototipo 3 adiciona upload de fotos, contato por e-mail, doacao geral,
+campanhas, apadrinhamento, necessidades por animal, doadores e historico de
+apoio. O Pix permanece informativo e cada apoio depende de confirmacao humana.
 
 ## Stack
 
@@ -24,7 +30,7 @@ O incremento do Prototipo 2.1 adiciona o registro inicial de interesse em adocao
 ```text
 apps/
   web/       Next.js com portal publico e admin inicial
-  api/       NestJS com modulos de animais e interesses iniciais
+  api/       NestJS com animais, interesses, apoios, contato e uploads
 packages/
   domain/    Entidades e regras de dominio
   shared/    Labels, opcoes, dados de demonstracao e conteudo do portal
@@ -81,6 +87,9 @@ Servicos:
 - API: `http://localhost:3333`
 - Health check da API: `http://localhost:3333/health`
 - Admin: `http://localhost:3000/admin/animais`
+- Apoios: `http://localhost:3000/apoie`
+- Administracao de apoios: `http://localhost:3000/admin/apoios`
+- Caixa local de e-mails: `http://localhost:8025`
 
 Codigo administrativo simulado: `anjos2026`.
 
@@ -104,6 +113,7 @@ Detalhes de execucao, verificacao e troubleshooting estao em `docs/16-execucao-p
 - Execucao com Docker: `docs/16-execucao-prototipo-docker.md`.
 - Evidencias ArcAssist-Web do Prototipo 1: `docs/15-prototipo-1-arcassist-web/`.
 - Evidencias ArcAssist-Web do Prototipo 2.1: `docs/21-prototipo-2-interesse-adocao/`.
+- Evidencias ArcAssist-Web do Prototipo 3: `docs/22-prototipo-3-apoios/`.
 - Gestao de textos e imagens do portal: `docs/20-gestao-de-conteudo.md`.
 
 ## Validacao e contribuicoes via GitHub
@@ -119,8 +129,8 @@ por Issues e Pull Requests.
 
 Use Issues para registrar problemas, sugestoes e percepcoes de validacao. Use
 Pull Requests para mudancas pequenas e focadas. Mudancas de escopo, como adocao
-completa, doacoes ou autenticacao real, devem ser discutidas em uma Issue antes
-da implementacao.
+completa, pagamento integrado ou autenticacao real, devem ser discutidas em uma
+Issue antes da implementacao.
 
 ## Executar com SQLite para prototipo
 
@@ -145,7 +155,8 @@ npm run dev
 npm test
 ```
 
-Os testes iniciais cobrem criacao/validacao de Animal, servico de listagem/criacao, regra de interesse inicial em adocao e componente `AnimalCard`.
+Os testes cobrem dominio de animais e apoios, services de animais, interesses e
+apoios, alem do componente `AnimalCard`.
 
 Pendente nesta primeira base: teste HTTP/e2e dos endpoints. A camada de service ja esta coberta com repositorio em memoria, mas o teste de endpoint deve entrar quando o fluxo de banco/Prisma estiver estabilizado no ambiente local.
 
@@ -191,6 +202,21 @@ Pendente nesta primeira base: teste HTTP/e2e dos endpoints. A camada de service 
 - Autenticacao esta simulada.
 - O interesse em adocao e apenas uma manifestacao inicial e deve usar dados ficticios em validacoes.
 - Fluxo de adocao estilo Tinder ainda nao foi implementado.
-- Doacoes, apadrinhamento, campanhas, parcerias e relatorios estao apenas planejados.
+- Doacoes, campanhas e apadrinhamento usam registro e confirmacao manual; nao
+  existe processamento automatico de pagamento.
+- Autenticacao, autorizacao, privacidade formal e auditoria financeira ainda
+  precisam ser implementadas antes de uso publico com dados reais.
+- Parcerias e relatorios consolidados ainda estao planejados.
 - Edicao administrativa de conteudo ainda nao foi implementada; por enquanto,
   textos e imagens sao alterados por Pull Request.
+
+## Escopo do Prototipo 3
+
+- Upload de imagem JPG, PNG ou WebP de ate 5 MB.
+- Contato por SMTP, com Mailpit no Docker.
+- Doacao geral e informacoes configuraveis de Pix.
+- Campanhas de arrecadacao e progresso confirmado.
+- Apadrinhamento unico ou mensal de animal.
+- Necessidades por animal.
+- Registro de doadores e historico administrativo.
+- Confirmacao ou cancelamento manual de apoios.

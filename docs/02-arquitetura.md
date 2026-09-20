@@ -78,7 +78,31 @@ No Docker, a Web usa `API_INTERNAL_URL` para chamadas server-side entre containe
 
 ## Modulos futuros
 
-Os modulos de adocao completa, adotantes, doacoes, apadrinhamento, campanhas, parcerias, dashboard, usuarios/permissoes, gestao administrativa de conteudo e relatorios devem ser adicionados incrementalmente, com ADRs quando introduzirem novas decisoes relevantes.
+Os modulos de adocao completa, adotantes, parcerias, dashboard,
+usuarios/permissoes, gestao administrativa de conteudo e relatorios devem ser
+adicionados incrementalmente, com ADRs quando introduzirem novas decisoes
+relevantes.
+
+## Modulo de doacoes e apoios
+
+O Prototipo 3 adiciona um modulo coeso de apoio financeiro:
+
+- dominio independente com `Campaign`, `AnimalNeed`, `Donor` e `SupportRecord`;
+- `SupportService` para validar destino, vinculos e confirmacao;
+- `SupportRepository` com implementacoes Prisma e em memoria;
+- API para campanhas, necessidades, doadores e historico;
+- pagina publica `/apoie`;
+- pagina administrativa `/admin/apoios`;
+- progresso calculado somente a partir de apoios `CONFIRMED`.
+
+O modulo registra intencoes e confirmacoes. O Pix e informativo; nao existe
+processamento automatico nem acesso a conta bancaria.
+
+## Upload e contato
+
+- `UploadsModule` valida e persiste imagens em diretorio/volume configuravel.
+- `ContactModule` valida mensagens e as encaminha por SMTP.
+- O Docker inclui Mailpit apenas para demonstracao local do envio.
 
 ## Decisoes iniciais
 
@@ -90,3 +114,6 @@ Os modulos de adocao completa, adotantes, doacoes, apadrinhamento, campanhas, pa
   evolucao futura para gestao administrativa.
 - Feed compacto para muitos animais, com suporte visual a midias quadradas e
   videos reais adiados para decisao futura.
+- Upload local de imagens com limite e volume persistente no prototipo.
+- Contato desacoplado por SMTP, com Mailpit no ambiente de demonstracao.
+- Apoios registrados antes da confirmacao humana, sem antecipar gateway.
