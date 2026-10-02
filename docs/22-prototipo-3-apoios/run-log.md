@@ -34,3 +34,24 @@
   concluido em setembro.
 - Os dados de seed sao ficticios.
 - A chave Pix padrao e explicitamente de demonstracao.
+
+## 2026-10-01
+
+- Parametrizada a configuracao SMTP do Docker por variaveis de ambiente.
+- Configurado localmente um destinatario institucional em `CONTACT_TO`, sem
+  versionar seu endereco no repositorio.
+- Confirmado no Mailpit que a mensagem usa o destinatario configurado e mantem
+  o e-mail do formulario no cabecalho `Reply-To`.
+- Entrega externa continua dependente de provedor e credenciais SMTP reais.
+
+## 2026-10-02
+
+- Auditoria inicial de dependencias identificou alertas criticos e altos em
+  dependencias do Next.js e da API.
+- Atualizados Next.js e componentes transitivos vulneraveis, mantendo as linhas
+  principais Next 15, Nest 11 e Prisma 6.
+- `pnpm audit --prod`: nenhuma vulnerabilidade conhecida apos a atualizacao.
+- Build Docker das imagens Web e API concluido com Node.js 22.
+- Lint e checagem de tipos concluidos sem erros.
+- Suite executada no Docker com `NODE_ENV=test`: 13 testes aprovados.
+- Portas do Compose restritas a `127.0.0.1`; limitacao registrada no ADR-012.

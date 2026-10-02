@@ -6,7 +6,7 @@ services:
       POSTGRES_USER: anjos
       POSTGRES_PASSWORD: anjos
     ports:
-      - "5432:5432"
+      - "127.0.0.1:5432:5432"
     volumes:
       - postgres_data:/var/lib/postgresql/data
     healthcheck:
@@ -18,7 +18,7 @@ services:
   mailpit:
     image: axllent/mailpit:v1.31.1
     ports:
-      - "8025:8025"
+      - "127.0.0.1:8025:8025"
 
   api:
     build:
@@ -28,11 +28,13 @@ services:
       DATABASE_URL: postgresql://anjos:anjos@postgres:5432/anjos_de_resgate?schema=public
       CORS_ORIGIN: http://localhost:3000
       PORT: 3333
-      SMTP_HOST: mailpit
-      SMTP_PORT: 1025
-      SMTP_SECURE: "false"
-      SMTP_FROM: Plataforma Anjos de Resgate <no-reply@anjos.local>
-      CONTACT_TO: contato@anjos.local
+      SMTP_HOST: ${SMTP_HOST:-mailpit}
+      SMTP_PORT: ${SMTP_PORT:-1025}
+      SMTP_SECURE: ${SMTP_SECURE:-false}
+      SMTP_USER: ${SMTP_USER:-}
+      SMTP_PASSWORD: ${SMTP_PASSWORD:-}
+      SMTP_FROM: ${SMTP_FROM:-Plataforma Anjos de Resgate <no-reply@anjos.local>}
+      CONTACT_TO: ${CONTACT_TO:-contato@anjos.local}
       UPLOAD_DIR: /app/apps/api/uploads
     depends_on:
       postgres:
@@ -40,7 +42,7 @@ services:
       mailpit:
         condition: service_started
     ports:
-      - "3333:3333"
+      - "127.0.0.1:3333:3333"
     volumes:
       - uploads_data:/app/apps/api/uploads
     healthcheck:
@@ -75,7 +77,7 @@ services:
       api:
         condition: service_healthy
     ports:
-      - "3000:3000"
+      - "127.0.0.1:3000:3000"
     healthcheck:
       test:
         [

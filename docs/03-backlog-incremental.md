@@ -22,7 +22,7 @@
 ### Itens remanescentes do Prototipo 1
 
 - Melhorar filtros de animais.
-- Upload ou gestao de imagens.
+- Gestao de imagens alem do upload local implementado no Prototipo 3.
 - Teste HTTP/e2e dos endpoints principais.
 - Revisar campos do cadastro apos validacao com a ONG.
 - Avaliar quais textos e imagens devem ser editaveis por administradores.
@@ -67,8 +67,21 @@
 
 ## Prototipo 4 - Parcerias
 
-- Vitrine de parceiros.
-- Veterinarios e pet shops parceiros.
+- Noticias, atividades e eventos. Planejado; a confirmar com a ONG.
+- Vitrine publica de parceiros. Planejado; a confirmar com a ONG.
+- Cadastro administrativo de parceiros. Planejado; a confirmar com a ONG.
+- Veterinarios, clinicas e pet shops parceiros. Categorias a confirmar.
+- Tipos de parceria e campos publicaveis. A confirmar.
+
+### Proxima quinzena proposta - 01 a 14/10/2026
+
+- Validar formalmente o Prototipo 3 e transformar ajustes em Issues.
+- Definir dados publicos, categorias e ciclo ativo/inativo de parceiros.
+- Implementar diretorio de parceiros de ponta a ponta como entrega principal.
+- Tratar noticias, atividades e eventos como extensao condicionada a capacidade.
+- Usar apenas dados ficticios ate aprovar acesso, privacidade e retencao.
+- Plano detalhado: `docs/23-diagnostico-e-plano-2026-10-01.md`.
+- Ficha de validacao: `docs/24-ficha-validacao-ong-2026-10.md`.
 
 ## Prototipo 5 - Mobile/PWA
 

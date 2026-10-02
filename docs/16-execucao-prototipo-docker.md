@@ -128,8 +128,48 @@ sh scripts/docker-prototype.sh reset
 ## Configuracao de e-mail, Pix e imagens
 
 No Docker, as mensagens sao capturadas pelo Mailpit e nao saem do computador.
-Para SMTP real, configure `SMTP_HOST`, `SMTP_PORT`, `SMTP_USER`,
-`SMTP_PASSWORD`, `SMTP_FROM` e `CONTACT_TO` fora do repositorio.
+O destinatario pode ser alterado no arquivo `.env` da raiz:
+
+```env
+CONTACT_TO=seu-email@example.org
+```
+
+Depois de salvar, recrie apenas o container da API:
+
+```bash
+docker compose -p anjos-de-resgate up -d --force-recreate api
+```
+
+Tambem e possivel executar `sh scripts/docker-prototype.sh up`, que preserva os
+volumes. Nao use `reset` apenas para aplicar essa configuracao: ele remove o
+banco e as imagens locais.
+
+Com `SMTP_HOST=mailpit`, o campo `CONTACT_TO` aparece como destinatario na caixa
+local em `http://localhost:8025`, mas nao recebe a mensagem na Internet. Para
+entrega externa real, configure no `.env` um servidor autorizado:
+
+```env
+SMTP_HOST=smtp.exemplo.org
+SMTP_PORT=587
+SMTP_SECURE=false
+SMTP_USER=usuario
+SMTP_PASSWORD=segredo
+SMTP_FROM=Plataforma Anjos de Resgate <remetente-autorizado@example.org>
+CONTACT_TO=destinatario@example.org
+```
+
+As credenciais devem permanecer no `.env`, fora do repositorio. O remetente de
+`SMTP_FROM` precisa ser aceito pelo provedor. Validar entrega, spam e politica
+institucional antes de usar com o publico.
+
+## Limite de seguranca do ambiente local
+
+As portas da Web, API, PostgreSQL e Mailpit sao publicadas somente em
+`127.0.0.1`. Isso reduz a exposicao acidental a outras maquinas da rede, mas nao
+transforma o prototipo em ambiente de producao. Os endpoints administrativos
+ainda nao possuem autenticacao real nem limitacao de requisicoes. Nao exponha
+este Compose na Internet e nao use dados pessoais ou financeiros reais antes da
+implementacao e validacao desses controles.
 
 Substitua `PIX_KEY` e `PIX_RECIPIENT` apenas depois da autorizacao da ONG. O
 prototipo exibe esses dados, mas nao processa nem confirma pagamentos.

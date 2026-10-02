@@ -40,9 +40,9 @@ O modulo de animais possui:
   animais.
 
 O feed publico usa tiles quadrados de midia para preparar a interface para
-dezenas de animais e para uma possivel evolucao futura com videos. Nesta
-iteracao, videos reais, upload de midia, storage, paginacao e filtros avancados
-nao foram implementados.
+dezenas de animais e para uma possivel evolucao futura com videos. O Prototipo 3
+adicionou upload local de imagens; videos reais, storage externo, paginacao e
+filtros avancados ainda nao foram implementados.
 
 ## Modulo de interesses de adocao
 
@@ -75,6 +75,11 @@ O projeto pode ser executado localmente de duas formas:
 - Ambiente Docker com PostgreSQL, API NestJS e Web Next.js.
 
 No Docker, a Web usa `API_INTERNAL_URL` para chamadas server-side entre containers e `NEXT_PUBLIC_API_URL` para chamadas feitas pelo navegador. Essa separacao evita que a renderizacao server-side da Web dependa de `localhost` dentro do container.
+
+O Compose de demonstracao publica Web, API, PostgreSQL e Mailpit somente em
+`127.0.0.1`. Essa contencao evita exposicao acidental na rede local, mas nao
+substitui autenticacao, autorizacao ou limitacao de requisicoes. O ambiente nao
+deve ser exposto na Internet nem receber dados reais.
 
 ## Modulos futuros
 
@@ -117,3 +122,5 @@ processamento automatico nem acesso a conta bancaria.
 - Upload local de imagens com limite e volume persistente no prototipo.
 - Contato desacoplado por SMTP, com Mailpit no ambiente de demonstracao.
 - Apoios registrados antes da confirmacao humana, sem antecipar gateway.
+- Portas do Compose restritas ao host local enquanto o acesso administrativo e
+  os endpoints permanecem proprios de prototipo.
