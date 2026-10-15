@@ -40,6 +40,9 @@ jobs:
       - name: Generate Prisma client
         run: pnpm db:generate
 
+      - name: Build shared packages before type-check
+        run: pnpm build:packages
+
       - name: Lint and type-check
         run: pnpm lint
 
@@ -55,3 +58,6 @@ jobs:
 
       - name: Build public-demo image
         run: docker build --file Dockerfile.deploy --tag anjos-de-resgate:ci .
+
+      - name: Check runtime within the free-tier memory limit
+        run: bash scripts/test-public-demo.sh anjos-de-resgate:ci

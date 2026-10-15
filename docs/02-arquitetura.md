@@ -88,6 +88,13 @@ memoria e aceita somente dados ficticios. O desenho reduz custo e superficie
 exposta, mas nao representa a topologia operacional futura. Consulte o
 [guia de publicacao](25-publicacao-demo-e-cicd.md) e a ADR-013.
 
+Na demo remota, dependencias sao instaladas no build; API e Web iniciam como
+dois processos Node supervisionados por Bash, com heaps ajustaveis. O CI
+compila pacotes compartilhados antes da tipagem e inicia um container de teste
+limitado a 512 MiB. Render observa os checks antes de implantar. A ADR-014 e o
+[registro de implantacao](26-registro-implantacao-demo-2026-10-15.md) documentam
+as falhas observadas, as correcoes e os limites dessas verificacoes.
+
 ## Modulos futuros
 
 Os modulos de adocao completa, adotantes, parcerias, dashboard,

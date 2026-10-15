@@ -69,3 +69,12 @@ retencao, credenciais, consentimento e uso de informacoes reais.
 - `apps/web/src/middleware.ts`
 - `docs/25-publicacao-demo-e-cicd.md`
 - `diagrams/implantacao-demo-publica.mmd`
+
+## Evolucao em 15/10/2026
+
+A proposta inicial de deploy hook foi substituida por `checksPass` no commit
+`615bc4e`, usando a conexao GitHub ja existente no Render. O estouro de memoria
+no primeiro deploy e a falha posterior de tipagem no CI motivaram a
+[ADR-014](ADR-014-runtime-enxuto-e-validacao-ci.md). O
+[registro da implantacao](../26-registro-implantacao-demo-2026-10-15.md) conserva
+as versoes, evidencias e o estado efetivo da publicacao.

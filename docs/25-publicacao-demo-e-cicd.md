@@ -16,12 +16,13 @@ O workflow `.github/workflows/ci-cd.yml` e iniciado em pull requests, commits
 no `main` e execucao manual.
 
 1. instala as dependencias com o lockfile;
-2. executa tipagem/lint;
-3. executa os testes automatizados;
-4. compila dominio, API e Web;
-5. constroi a mesma imagem Docker usada na hospedagem;
-6. no `main`, publica o resultado dos checks para o Render;
-7. o Render implanta o commit somente quando todos os checks passam e valida
+2. gera o cliente Prisma e compila os pacotes compartilhados;
+3. executa tipagem/lint e testes automatizados;
+4. compila as aplicacoes API e Web;
+5. constroi a imagem com o mesmo Dockerfile utilizado pelo Render;
+6. inicia a imagem com 512 MiB e testa saude, credencial HTTP e proxy;
+7. no `main`, disponibiliza o resultado dos checks para o Render;
+8. o Render implanta o commit somente quando os checks passam e valida
    `/healthz` antes de concluir o deploy.
 
 ## Criar o servico no Render
@@ -52,7 +53,11 @@ segredo no GitHub. Em cada commit no `main`:
 
 Pull requests executam as mesmas verificacoes, mas nao publicam a demo.
 
-## Links para compartilhar
+## Estado e links da demo
+
+A URL foi atribuida pelo Render. Consulte o
+[registro da implantacao](26-registro-implantacao-demo-2026-10-15.md) para saber
+se o deploy ja foi concluido e validado antes de compartilhar os links.
 
 | Destino | Link |
 | --- | --- |
@@ -85,3 +90,14 @@ Pull requests executam as mesmas verificacoes, mas nao publicam a demo.
 - [ ] nenhuma chave ou senha aparece no repositorio ou nos logs.
 - [ ] a equipe foi avisada de que alteracoes nao persistem.
 - [ ] feedback e registrado em Issue ou ficha de validacao.
+
+## Registrar cada alteracao e tentativa
+
+Para cada tentativa, atualizar o registro de implantacao com SHA, execucao do
+CI, ID do deploy, resultados, limites e pendencias. Manter observacoes medidas
+separadas de hipoteses de causa. Decisoes que alterem runtime, infraestrutura ou
+politica de deploy devem constar em ADR e no diagrama de implantacao.
+
+A ADR-014 documenta Node direto no runtime, os limites de heap e o teste
+descartavel de 512 MiB. A ausencia de `dist` no runner tambem demonstrou a
+necessidade de validar em checkout limpo.

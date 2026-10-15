@@ -305,16 +305,18 @@ pnpm test
 ## Demo remota
 
 O repositorio inclui uma demo gratuita e protegida para validacao remota. O
-GitHub Actions executa tipagem, testes, build das aplicacoes e build Docker;
-commits no `main` somente sao enviados ao Render quando todas as verificacoes
-passam e o deploy foi habilitado no repositorio.
+GitHub Actions executa tipagem, testes, builds e um teste de inicializacao com
+512 MiB. O Render usa os resultados dos checks para decidir quando implantar
+commits no `main`.
 
 > **Limite deliberado:** a demo usa dados ficticios e memoria temporaria. Nao
 > informe dados pessoais ou financeiros; alteracoes podem desaparecer quando a
 > instancia reiniciar. A credencial compartilhada nao substitui a autenticacao
 > individual prevista para uma implantacao operacional.
 
-A URL sera registrada aqui depois da primeira criacao do servico. O
+A URL atribuida e https://anjos-de-resgate-demo.onrender.com/. O
+[registro da implantacao](docs/26-registro-implantacao-demo-2026-10-15.md)
+informa o estado verificado e as pendencias antes da divulgacao. O
 [guia de publicacao e CI/CD](docs/25-publicacao-demo-e-cicd.md) explica a
 configuracao, os links que devem ser compartilhados e as limitacoes do plano
 gratuito.

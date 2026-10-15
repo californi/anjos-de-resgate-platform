@@ -18,9 +18,9 @@ de criar recursos externos.
   animais ficticios.
 - Container temporario removido apos a verificacao.
 
-Pendente: criar o Blueprint no Render, configurar secrets/variables no GitHub e
-registrar a URL efetiva. Nenhum dado foi enviado a um provedor externo nesta
-verificacao.
+Este registro descreve somente o teste local inicial. A criacao posterior do
+Blueprint, as falhas e os testes de correcao estao documentados no
+[registro da implantacao](26-registro-implantacao-demo-2026-10-15.md).
 
 ## Template
 
@@ -195,16 +195,41 @@ verificacao.
 
 - O Render construiu a imagem do commit `5908aaf`, mas encerrou o container por
   exceder os 512 MiB da instancia gratuita antes da abertura da porta Web.
-- Os dois comandos `pnpm` executados em paralelo no runtime revalidaram a arvore
-  de dependencias e elevaram o consumo de memoria.
+- O log mostrou dois processos `pnpm` revalidando dependencias durante o
+  runtime. A contribuicao exata de cada processo para o estouro de memoria nao
+  foi medida; o encerramento por falta de memoria foi confirmado pelo Render.
 
 ### Ajuste aplicado
 
 - A API NestJS e a Web Next.js passaram a iniciar diretamente com Node, usando
   somente os artefatos produzidos no build da imagem.
 - Foram definidos limites independentes de heap para API e Web, mantendo a
-  arquitetura de processo unico de implantacao descrita no ADR-013 sem
-  introduzir novos servicos.
+  arquitetura de um container com dois processos descrita no ADR-013.
+
+### Teste local da correcao ja executado
+
+- A imagem `anjos-de-resgate:render-fix` foi construida e iniciada localmente.
+- `/healthz` retornou 200; a raiz retornou 401 sem credencial e 200 com
+  credencial; o proxy respondeu em `/api/health` e listou 30 animais ficticios.
+- Uma amostra de `docker stats` mostrou 119,7 MiB. O container desse teste tinha
+  limite de 3,826 GiB; esse resultado nao comprova comportamento sob 512 MiB.
+- Esse build usou o diretorio de trabalho, que continha cinco alteracoes locais
+  adicionais. O teste isolado do conteudo destinado ao commit e registrado
+  separadamente no registro da implantacao.
+
+### Falha adicional identificada no CI
+
+- A execucao `38791614537`, commit `615bc4e`, falhou na tipagem com
+  `Cannot find module '@anjos/domain'`.
+- Os consumidores procuram `dist/index.d.ts`, mas os pacotes compartilhados
+  ainda nao haviam sido compilados no runner limpo.
+- A ordem foi corrigida para gerar Prisma, compilar pacotes compartilhados,
+  verificar tipagem, testar e compilar as aplicacoes.
+- O CI passou a incluir `scripts/test-public-demo.sh`, executando a imagem com
+  limite de 512 MiB e verificando saude, credencial HTTP e proxy da API.
+
+Evidencias, estados e limites: [registro da implantacao](26-registro-implantacao-demo-2026-10-15.md)
+e [ADR-014](07-decisoes-arquiteturais/ADR-014-runtime-enxuto-e-validacao-ci.md).
 
 ### Criterios para nova tentativa
 
