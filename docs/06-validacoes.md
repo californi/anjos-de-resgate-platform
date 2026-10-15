@@ -188,3 +188,27 @@ verificacao.
   credenciais de um provedor SMTP real.
 - O acesso administrativo continua simulado e nao protege os endpoints da API.
   Autenticacao e autorizacao permanecem necessarias antes da implantacao.
+
+## Validacao de implantacao da demo - 2026-10-15
+
+### Primeira tentativa
+
+- O Render construiu a imagem do commit `5908aaf`, mas encerrou o container por
+  exceder os 512 MiB da instancia gratuita antes da abertura da porta Web.
+- Os dois comandos `pnpm` executados em paralelo no runtime revalidaram a arvore
+  de dependencias e elevaram o consumo de memoria.
+
+### Ajuste aplicado
+
+- A API NestJS e a Web Next.js passaram a iniciar diretamente com Node, usando
+  somente os artefatos produzidos no build da imagem.
+- Foram definidos limites independentes de heap para API e Web, mantendo a
+  arquitetura de processo unico de implantacao descrita no ADR-013 sem
+  introduzir novos servicos.
+
+### Criterios para nova tentativa
+
+- A imagem deve iniciar API e Web sem instalar dependencias no runtime.
+- `/healthz` deve responder com sucesso.
+- A raiz deve exigir a credencial HTTP da demo.
+- `/api/health` e `/api/animals` devem responder por meio do proxy da Web.

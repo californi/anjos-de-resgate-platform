@@ -11,10 +11,14 @@ cleanup() {
 
 trap cleanup EXIT INT TERM
 
-API_PORT="${API_PORT:-3333}" pnpm --filter @anjos/api start &
+API_PORT="${API_PORT:-3333}" \
+  NODE_OPTIONS="${API_NODE_OPTIONS:---max-old-space-size=96}" \
+  node apps/api/dist/main.js &
 api_pid=$!
 
-PORT="${PORT:-3000}" pnpm --filter @anjos/web start &
+PORT="${PORT:-3000}" \
+  NODE_OPTIONS="${WEB_NODE_OPTIONS:---max-old-space-size=192}" \
+  node apps/web/node_modules/next/dist/bin/next start apps/web -p "${PORT:-3000}" &
 web_pid=$!
 
 wait -n "$api_pid" "$web_pid"
