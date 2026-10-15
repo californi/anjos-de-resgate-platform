@@ -1,0 +1,95 @@
+name: CI and public demo deploy
+
+on:
+  pull_request:
+    branches: [main]
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: public-demo-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  quality:
+    name: Test, build and container
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          version: 11.7.0
+          run_install: false
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: pnpm
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+
+      - name: Generate Prisma client
+        run: pnpm db:generate
+
+      - name: Lint and type-check
+        run: pnpm lint
+
+      - name: Test
+        env:
+          NODE_ENV: test
+        run: pnpm test
+
+      - name: Build applications
+        env:
+          NEXT_PUBLIC_API_URL: /api
+        run: pnpm build
+
+      - name: Build public-demo image
+        run: docker build --file Dockerfile.deploy --tag anjos-de-resgate:ci .
+
+  deploy:
+    name: Deploy public demo
+    needs: quality
+    if: >-
+      github.event_name != 'pull_request' &&
+      github.ref == 'refs/heads/main' &&
+      vars.DEPLOY_ENABLED == 'true'
+    runs-on: ubuntu-latest
+    environment: public-demo
+    steps:
+      - name: Trigger the validated commit on Render
+        env:
+          DEPLOY_HOOK: ${{ secrets.RENDER_DEPLOY_HOOK_URL }}
+          COMMIT_SHA: ${{ github.sha }}
+        run: |
+          test -n "$DEPLOY_HOOK"
+          separator='?'
+          case "$DEPLOY_HOOK" in *\?*) separator='&' ;; esac
+          curl --fail --silent --show-error --request POST \
+            "${DEPLOY_HOOK}${separator}ref=${COMMIT_SHA}"
+
+      - name: Wait for the public health check
+        env:
+          PUBLIC_APP_URL: ${{ vars.PUBLIC_APP_URL }}
+        run: |
+          test -n "$PUBLIC_APP_URL"
+          for attempt in $(seq 1 40); do
+            if curl --fail --silent --show-error \
+              "${PUBLIC_APP_URL%/}/healthz" >/dev/null; then
+              echo "Public demo is healthy: $PUBLIC_APP_URL"
+              exit 0
+            fi
+            echo "Waiting for deployment ($attempt/40)..."
+            sleep 15
+          done
+          echo "Deployment did not become healthy in time."
+          exit 1

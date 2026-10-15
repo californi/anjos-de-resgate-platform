@@ -1,0 +1,16 @@
+flowchart LR
+    Dev[Colaborador] -->|pull request ou commit| GH[GitHub]
+    GH --> CI[GitHub Actions<br/>tipagem, testes e builds]
+    CI --> IMG[Validacao da imagem<br/>Docker]
+    IMG -->|main aprovado| Hook[Deploy hook]
+    Hook --> Render[Render Free<br/>Next.js + NestJS]
+    Render --> Gate[Credencial compartilhada<br/>de demonstracao]
+    Gate --> Members[ONG e equipe]
+    Render --> Memory[(Dados ficticios<br/>em memoria)]
+
+    classDef control fill:#eef5ff,stroke:#2c5f8a,color:#17324d;
+    classDef deploy fill:#e5f4ec,stroke:#237a57,color:#173f31;
+    classDef warning fill:#fff4d8,stroke:#d99b2b,color:#614510;
+    class CI,IMG,Hook control;
+    class Render,Gate deploy;
+    class Memory warning;

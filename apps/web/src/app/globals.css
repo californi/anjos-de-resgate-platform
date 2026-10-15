@@ -53,6 +53,16 @@ textarea {
   min-width: 320px;
 }
 
+.demo-notice {
+  border-bottom: 1px solid #e6c265;
+  background: #fff4d8;
+  color: #614510;
+  padding: 0.55rem 1rem;
+  text-align: center;
+  font-size: 0.9rem;
+  font-weight: 700;
+}
+
 .site-header {
   position: sticky;
   top: 0;

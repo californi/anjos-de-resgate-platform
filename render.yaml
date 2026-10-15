@@ -1,0 +1,29 @@
+services:
+  - type: web
+    name: anjos-de-resgate-demo
+    runtime: docker
+    plan: free
+    branch: main
+    autoDeployTrigger: off
+    dockerfilePath: ./Dockerfile.deploy
+    dockerContext: .
+    healthCheckPath: /healthz
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: API_PORT
+        value: "3333"
+      - key: API_INTERNAL_URL
+        value: http://127.0.0.1:3333
+      - key: NEXT_PUBLIC_API_URL
+        value: /api
+      - key: USE_IN_MEMORY_REPOSITORY
+        value: "true"
+      - key: PUBLIC_DEMO_USER
+        sync: false
+      - key: PUBLIC_DEMO_PASSWORD
+        sync: false
+      - key: PIX_KEY
+        value: PIX-DEMONSTRACAO
+      - key: PIX_RECIPIENT
+        value: Anjos de Resgate - ambiente de demonstracao

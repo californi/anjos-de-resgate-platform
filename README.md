@@ -17,6 +17,7 @@
   <a href="#conheça-o-protótipo">Protótipo</a> ·
   <a href="#equipe-e-parceria">Equipe</a> ·
   <a href="#execute-localmente">Executar</a> ·
+  <a href="#demo-remota">Demo remota</a> ·
   <a href="#participe-da-validação">Participar</a>
 </p>
 
@@ -27,10 +28,11 @@
   <img alt="Contexto: pesquisa e extensão" src="https://img.shields.io/badge/contexto-pesquisa%20%2B%20extens%C3%A3o-5b4b8a">
 </p>
 
-> **Estado em 2 de outubro de 2026.** O Protótipo 3 está implementado no
-> repositório e disponível para demonstração local. Sua validação formal com a
-> ONG e a definição de dados reais, privacidade, autenticação e implantação
-> continuam pendentes. Planejamento não é tratado como evidência de conclusão.
+> **Estado em 15 de outubro de 2026.** O Protótipo 3 está implementado e a
+> configuração de demo remota com CI/CD foi validada localmente. A ativação da
+> URL no Render, a validação formal com a ONG e a definição de privacidade,
+> autenticação e implantação operacional continuam pendentes. Planejamento não
+> é tratado como evidência de conclusão.
 
 ---
 
@@ -300,6 +302,23 @@ pnpm install
 pnpm test
 ```
 
+## Demo remota
+
+O repositorio inclui uma demo gratuita e protegida para validacao remota. O
+GitHub Actions executa tipagem, testes, build das aplicacoes e build Docker;
+commits no `main` somente sao enviados ao Render quando todas as verificacoes
+passam e o deploy foi habilitado no repositorio.
+
+> **Limite deliberado:** a demo usa dados ficticios e memoria temporaria. Nao
+> informe dados pessoais ou financeiros; alteracoes podem desaparecer quando a
+> instancia reiniciar. A credencial compartilhada nao substitui a autenticacao
+> individual prevista para uma implantacao operacional.
+
+A URL sera registrada aqui depois da primeira criacao do servico. O
+[guia de publicacao e CI/CD](docs/25-publicacao-demo-e-cicd.md) explica a
+configuracao, os links que devem ser compartilhados e as limitacoes do plano
+gratuito.
+
 ---
 
 ## Participe da validação
@@ -347,6 +366,7 @@ implementação.
 - [Gestão do conteúdo](docs/20-gestao-de-conteudo.md)
 - [Diagnóstico e plano de outubro](docs/23-diagnostico-e-plano-2026-10-01.md)
 - [Ficha de validação](docs/24-ficha-validacao-ong-2026-10.md)
+- [Publicação da demo e CI/CD](docs/25-publicacao-demo-e-cicd.md)
 
 </details>
 

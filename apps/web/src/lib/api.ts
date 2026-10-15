@@ -229,7 +229,9 @@ export async function uploadAnimalImage(file: File): Promise<string> {
   });
   if (!response.ok) throw new Error(await readApiError(response));
   const result = (await response.json()) as { path: string };
-  return `${PUBLIC_API_URL}${result.path}`;
+  return /^https?:\/\//.test(result.path)
+    ? result.path
+    : `${PUBLIC_API_URL}${result.path}`;
 }
 
 export async function sendContactMessage(input: Record<string, unknown>) {

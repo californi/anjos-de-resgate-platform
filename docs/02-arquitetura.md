@@ -81,6 +81,13 @@ O Compose de demonstracao publica Web, API, PostgreSQL e Mailpit somente em
 substitui autenticacao, autorizacao ou limitacao de requisicoes. O ambiente nao
 deve ser exposto na Internet nem receber dados reais.
 
+Uma configuracao separada publica uma demo remota no Render. Nela, Next.js e
+NestJS executam no mesmo container, a API permanece interna e a Web encaminha
+`/api/*`. A demo exige credencial HTTP compartilhada, usa repositorios em
+memoria e aceita somente dados ficticios. O desenho reduz custo e superficie
+exposta, mas nao representa a topologia operacional futura. Consulte o
+[guia de publicacao](25-publicacao-demo-e-cicd.md) e a ADR-013.
+
 ## Modulos futuros
 
 Os modulos de adocao completa, adotantes, parcerias, dashboard,
@@ -124,3 +131,5 @@ processamento automatico nem acesso a conta bancaria.
 - Apoios registrados antes da confirmacao humana, sem antecipar gateway.
 - Portas do Compose restritas ao host local enquanto o acesso administrativo e
   os endpoints permanecem proprios de prototipo.
+- Demo remota protegida, efemera e alimentada apenas por dados ficticios, com
+  CI/CD apos validacao automatizada.
