@@ -30,8 +30,8 @@ gratuito no Render:
 - contatos reais, imagens persistentes e dados pessoais nao integram esta
   primeira publicacao;
 - GitHub Actions executa verificacoes em pull requests e `main`;
-- um deploy hook do Render e acionado somente depois de todas as verificacoes
-  e somente quando `DEPLOY_ENABLED=true`.
+- o Render observa os checks do GitHub e implanta commits do `main` somente
+  quando todos passam, sem armazenar um deploy hook adicional.
 
 A barreira HTTP e adequada apenas para a demo compartilhada. Ela nao substitui
 autenticacao individual, autorizacao, auditoria, recuperacao de senha ou
@@ -41,7 +41,7 @@ revogacao de acesso.
 
 | Alternativa | Vantagem | Restricao relevante | Decisao |
 | --- | --- | --- | --- |
-| Render Free | Docker, URL HTTPS e deploy hook | suspensao por inatividade e disco efemero | escolhida para a demo |
+| Render Free | Docker, URL HTTPS e deploy condicionado aos checks | suspensao por inatividade e disco efemero | escolhida para a demo |
 | Koyeb Free | deploy Git e uma instancia gratuita | 512 MB, sem volume e escala a zero | alternativa de hospedagem |
 | Vercel Hobby | boa integracao com Next.js | uso Hobby restrito a projetos pessoais nao comerciais; API e dados exigiriam outros servicos | nao escolhida |
 | GitHub Pages | gratuito e simples | hospeda apenas conteudo estatico, nao NestJS | inadequada |

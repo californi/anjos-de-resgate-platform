@@ -29,8 +29,8 @@
 </p>
 
 > **Estado em 15 de outubro de 2026.** O Protótipo 3 está implementado e a
-> configuração de demo remota com CI/CD foi validada localmente. A ativação da
-> URL no Render, a validação formal com a ONG e a definição de privacidade,
+> configuração de demo remota com CI/CD foi validada localmente e criada no
+> Render. A validação formal com a ONG e a definição de privacidade,
 > autenticação e implantação operacional continuam pendentes. Planejamento não
 > é tratado como evidência de conclusão.
 
