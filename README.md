@@ -29,8 +29,8 @@
 </p>
 
 > **Estado em 15 de outubro de 2026.** O Protótipo 3 está implementado e a
-> configuração de demo remota com CI/CD foi validada localmente e criada no
-> Render. A validação formal com a ONG e a definição de privacidade,
+> demo remota protegida está ativa no Render, com CI aprovado e verificação
+> pública de saúde e proteção HTTP. A validação formal com a ONG e a definição de privacidade,
 > autenticação e implantação operacional continuam pendentes. Planejamento não
 > é tratado como evidência de conclusão.
 
@@ -314,7 +314,8 @@ commits no `main`.
 > instancia reiniciar. A credencial compartilhada nao substitui a autenticacao
 > individual prevista para uma implantacao operacional.
 
-A URL atribuida e https://anjos-de-resgate-demo.onrender.com/. O
+Acesse a [demo protegida](https://anjos-de-resgate-demo.onrender.com/) com a
+credencial fornecida pelo responsavel. O
 [registro da implantacao](docs/26-registro-implantacao-demo-2026-10-15.md)
 informa o estado verificado e as pendencias antes da divulgacao. O
 [guia de publicacao e CI/CD](docs/25-publicacao-demo-e-cicd.md) explica a

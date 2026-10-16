@@ -237,3 +237,18 @@ e [ADR-014](07-decisoes-arquiteturais/ADR-014-runtime-enxuto-e-validacao-ci.md).
 - `/healthz` deve responder com sucesso.
 - A raiz deve exigir a credencial HTTP da demo.
 - `/api/health` e `/api/animals` devem responder por meio do proxy da Web.
+
+### Resultado da tentativa corrigida
+
+- Commit `c5e8277`: CI `38825270206` aprovado em 2m23s, com 13 testes passando
+  no checkout limpo, builds concluidos e teste de runtime aprovado sob 512 MiB.
+- O runtime no runner retornou 30 animais ficticios e uma amostra de
+  105,6 MiB. A diferenca em relacao ao teste local nao e tratada como ganho de
+  desempenho, pois ambientes e condicoes diferem.
+- Render iniciou `Auto-Deploy` apos os checks e marcou o deploy
+  `dep-db8mbcek1f9s73c51l60` como `Live`, em 1m38s.
+- A contagem anterior de 14 testes refere-se ao diretorio local com uma
+  alteracao de UI ainda nao commitada; a execucao publicada teve 13 testes.
+- A URL HTTPS publica respondeu 200 em `/healthz` e 401 sem credencial em `/`,
+  `/admin/animais` e `/api/animals`. A navegacao autenticada pela equipe remota
+  permanece como passo de validacao com a credencial do responsavel.

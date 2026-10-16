@@ -55,9 +55,11 @@ Pull requests executam as mesmas verificacoes, mas nao publicam a demo.
 
 ## Estado e links da demo
 
-A URL foi atribuida pelo Render. Consulte o
-[registro da implantacao](26-registro-implantacao-demo-2026-10-15.md) para saber
-se o deploy ja foi concluido e validado antes de compartilhar os links.
+A demo esta ativa no commit `c5e8277`, com CI aprovado, saude publica 200 e
+protecao HTTP verificada em 15/10/2026. O
+[registro da implantacao](26-registro-implantacao-demo-2026-10-15.md) conserva
+os resultados e limites. Cada avaliador deve usar a credencial compartilhada
+pelo responsavel para confirmar a navegacao autenticada.
 
 | Destino | Link |
 | --- | --- |
@@ -83,9 +85,10 @@ se o deploy ja foi concluido e validado antes de compartilhar os links.
 
 ## Checklist de liberacao
 
-- [ ] CI verde no commit publicado.
-- [ ] `/healthz` retorna HTTP 200.
-- [ ] credencial HTTP solicitada antes de abrir a demo.
+- [x] CI verde no commit publicado.
+- [x] `/healthz` retorna HTTP 200.
+- [x] rotas publicas, administrativas e de API rejeitam acesso sem credencial.
+- [ ] navegacao autenticada confirmada pela equipe no ambiente remoto.
 - [ ] dados exibidos sao ficticios.
 - [ ] nenhuma chave ou senha aparece no repositorio ou nos logs.
 - [ ] a equipe foi avisada de que alteracoes nao persistem.
